@@ -24,9 +24,10 @@
     body {
       margin: 0;
       padding: 24px;
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top left, #e0f2fe, #eef2ff 30%, #f9fafb 70%);
       color: var(--text-main);
+      font-size: 16px;
     }
 
     /* Layout */
@@ -51,25 +52,25 @@
     }
 
     h1 {
-      font-size: 26px;
+      font-size: 28px;
       margin-bottom: 6px;
       margin-top: 0;
     }
 
     h2 {
-      font-size: 18px;
+      font-size: 19px;
       margin-top: 18px;
       margin-bottom: 6px;
     }
 
     .title-sub {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-muted);
       margin-bottom: 20px;
     }
 
     .badge {
-      font-size: 11px;
+      font-size: 12px;
       padding: 4px 10px;
       border-radius: 999px;
       background: #ecfdf3;
@@ -81,8 +82,8 @@
 
     input[type="text"], input[type="number"] {
       width: 100%;
-      padding: 8px;
-      font-size: 14px;
+      padding: 9px;
+      font-size: 15px;
       border-radius: 8px;
       border: 1px solid var(--border);
       background: #f9fafb;
@@ -98,12 +99,12 @@
     label {
       display: block;
       margin-top: 8px;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     small.helper {
       display: block;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-top: 2px;
     }
@@ -113,7 +114,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .three-col {
@@ -142,17 +143,18 @@
       padding: 4px 10px;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 13px;
     }
 
     .primary-btn {
       margin-top: 10px;
-      padding: 10px;
+      padding: 11px;
       width: 100%;
       border: none;
       border-radius: 10px;
       background: var(--accent);
       color: white;
-      font-size: 15px;
+      font-size: 16px;
       cursor: pointer;
       transition: 0.2s;
     }
@@ -166,7 +168,7 @@
       border: 1px solid var(--border);
       background: #f9fafb;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .secondary-btn:hover {
@@ -200,7 +202,7 @@
     .summary-row {
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
+      font-size: 15px;
       margin-bottom: 4px;
     }
 
@@ -212,16 +214,17 @@
     }
 
     .pill-total {
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
       background: #4f46e5;
       color: #ffffff;
       font-weight: 600;
+      font-size: 15px;
     }
 
     .title-summary-display {
       margin-top: 16px;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
       color: #4f46e5;
     }
@@ -236,8 +239,8 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
-      min-width: 520px;
+      font-size: 14px;
+      min-width: 420px;
     }
 
     th, td {
@@ -267,64 +270,12 @@
     .suggestion-item {
       padding: 8px 10px;
       cursor: pointer;
-      font-size: 13px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .suggestion-item span.count {
-      font-size: 11px;
-      color: var(--text-muted);
+      font-size: 14px;
     }
 
     .suggestion-item:hover {
       background: #eef2ff;
       color: var(--accent);
-    }
-
-    /* Bill history */
-    .history-empty {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-
-    .history-list {
-      margin-top: 10px;
-      border-top: 1px dashed var(--border);
-      padding-top: 10px;
-    }
-
-    .history-item {
-      width: 100%;
-      text-align: left;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #f9fafb;
-      padding: 8px 10px;
-      font-size: 13px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin-bottom: 6px;
-    }
-
-    .history-item:hover {
-      background: #eef2ff;
-      border-color: var(--accent);
-    }
-
-    .history-title {
-      font-weight: 600;
-    }
-
-    .history-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
     }
 
     /* Mobile tweaks */
@@ -339,11 +290,11 @@
       }
 
       h1 {
-        font-size: 22px;
+        font-size: 24px;
       }
 
       .title-sub {
-        font-size: 13px;
+        font-size: 14px;
       }
 
       .badge {
@@ -353,7 +304,7 @@
       }
 
       table {
-        font-size: 12px;
+        font-size: 13px;
       }
     }
   </style>
@@ -377,7 +328,7 @@
 
       <div class="three-col">
         <div>
-          <label>✂️ Staff Discount (%)</label>
+          <label>Staff Discount (%)</label>
           <input id="staffPct" type="number" step="0.01" value="10" />
           <div class="checkbox-row">
             <input id="applyStaff" type="checkbox" checked /> Apply
@@ -385,7 +336,7 @@
         </div>
 
         <div>
-          <label>🧾 Service Charge (%)</label>
+          <label>Service Charge (%)</label>
           <input id="svcPct" type="number" step="0.01" value="10" />
           <div class="checkbox-row">
             <input id="applySvc" type="checkbox" checked /> Apply
@@ -393,7 +344,7 @@
         </div>
 
         <div>
-          <label>💰 GST (%)</label>
+          <label>GST (%)</label>
           <input id="gstPct" type="number" step="0.01" value="9" />
           <div class="checkbox-row">
             <input id="applyGst" type="checkbox" checked /> Apply
@@ -405,7 +356,11 @@
       <h2>🔁 Common Charge</h2>
       <label>Shared amount (split equally)</label>
       <input id="commonCharge" type="number" step="0.01" placeholder="e.g. 20 for shared dish" />
-      <small class="helper">This amount will be divided equally across all payees and included in their base.</small>
+      <div class="checkbox-row">
+        <input id="applyCommon" type="checkbox" checked />
+        <span>Apply common charge</span>
+      </div>
+      <small class="helper">If applied, this amount will be divided equally across all payees and added to their base.</small>
 
       <!-- Payees -->
       <h2>👥 Payees</h2>
@@ -427,14 +382,11 @@
       <div id="summaryTitle" class="title-summary-display"></div>
 
       <div id="perPersonTable"></div>
-
-      <h2>🧾 Bill History</h2>
-      <div id="billHistory"></div>
     </div>
   </div>
 
   <script>
-    /* ---------- Payee history helpers (frequency, most used first) ---------- */
+    /* ---------- Payee history helpers (most used first, no count shown) ---------- */
 
     function loadPayeeHistory() {
       try {
@@ -494,7 +446,7 @@
       list.forEach(h => {
         const item = document.createElement("div");
         item.className = "suggestion-item";
-        item.innerHTML = `<span>${h.name}</span><span class="count">×${h.count}</span>`;
+        item.textContent = h.name;
         item.onclick = (e) => {
           e.stopPropagation();
           inputEl.value = h.name;
@@ -514,7 +466,7 @@
       }
     });
 
-    /* ---------- Bill state + history ---------- */
+    /* ---------- Bill state (remember last bill) ---------- */
 
     function saveCurrentState(state) {
       localStorage.setItem("billStateV1", JSON.stringify(state));
@@ -528,76 +480,6 @@
       } catch {
         return null;
       }
-    }
-
-    function loadBillHistoryList() {
-      try {
-        return JSON.parse(localStorage.getItem("billHistoryV1") || "[]");
-      } catch {
-        return [];
-      }
-    }
-
-    function saveBillHistoryList(list) {
-      localStorage.setItem("billHistoryV1", JSON.stringify(list));
-    }
-
-    function addBillToHistory(entry) {
-      let history = loadBillHistoryList();
-      history.unshift(entry);
-      if (history.length > 20) history = history.slice(0, 20);
-      saveBillHistoryList(history);
-      renderBillHistory();
-    }
-
-    function renderBillHistory() {
-      const container = document.getElementById("billHistory");
-      const history = loadBillHistoryList();
-
-      if (!history.length) {
-        container.innerHTML = `<p class="history-empty">No past bills yet. Calculate to save your first bill.</p>`;
-        return;
-      }
-
-      let html = `<div class="history-list">`;
-      history.forEach((bill, idx) => {
-        const title = bill.billTitle || "Untitled bill";
-        const dt = new Date(bill.timestamp || Date.now());
-        const dateStr = dt.toLocaleDateString(undefined, { month: "short", day: "numeric" });
-        const timeStr = dt.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
-        html += `
-          <button class="history-item" onclick="loadBillFromHistory(${idx})">
-            <div class="history-title">${title}</div>
-            <div class="history-meta">
-              <span>${dateStr} · ${timeStr}</span>
-              <span>Total $${(bill.grandTotal || 0).toFixed(2)}</span>
-            </div>
-          </button>
-        `;
-      });
-      html += `</div>`;
-      container.innerHTML = html;
-    }
-
-    function loadBillFromHistory(index) {
-      const history = loadBillHistoryList();
-      const bill = history[index];
-      if (!bill) return;
-
-      document.getElementById("billTitle").value = bill.billTitle || "";
-      document.getElementById("staffPct").value = bill.staffPct ?? 10;
-      document.getElementById("svcPct").value   = bill.svcPct   ?? 10;
-      document.getElementById("gstPct").value   = bill.gstPct   ?? 9;
-      document.getElementById("applyStaff").checked = !!bill.applyStaff;
-      document.getElementById("applySvc").checked   = !!bill.applySvc;
-      document.getElementById("applyGst").checked   = !!bill.applyGst;
-      document.getElementById("commonCharge").value = bill.commonCharge ?? 0;
-
-      const container = document.getElementById("peopleContainer");
-      container.innerHTML = "";
-      (bill.people || []).forEach(p => addPerson(p.name, p.amt));
-
-      calculate();
     }
 
     /* ---------- Core UI logic ---------- */
@@ -627,15 +509,18 @@
       const staffPct = +document.getElementById("staffPct").value || 0;
       const svcPct   = +document.getElementById("svcPct").value   || 0;
       const gstPct   = +document.getElementById("gstPct").value   || 0;
-      const commonCharge = +document.getElementById("commonCharge").value || 0;
+      const commonChargeVal = +document.getElementById("commonCharge").value || 0;
 
-      const applyStaff = document.getElementById("applyStaff").checked;
-      const applySvc   = document.getElementById("applySvc").checked;
-      const applyGst   = document.getElementById("applyGst").checked;
+      const applyStaff  = document.getElementById("applyStaff").checked;
+      const applySvc    = document.getElementById("applySvc").checked;
+      const applyGst    = document.getElementById("applyGst").checked;
+      const applyCommon = document.getElementById("applyCommon").checked;
 
       const staffRate = applyStaff ? staffPct / 100 : 0;
-      const svcRate   = applySvc   ? svcPct / 100   : 0;
-      const gstRate   = applyGst   ? gstPct / 100   : 0;
+      const svcRate   = applySvc   ? svcPct   / 100 : 0;
+      const gstRate   = applyGst   ? gstPct   / 100 : 0;
+
+      const commonCharge = applyCommon ? commonChargeVal : 0;
 
       const rows = document.querySelectorAll(".person-row");
       const people = [];
@@ -688,47 +573,54 @@
       document.getElementById("summaryTotals").innerHTML = summaryHtml;
       document.getElementById("summaryTitle").textContent = billTitle || "";
 
-      const staffLabel = `After Staff (${staffPct}%)`;
-
       // Per-person breakdown
+      const perCommon = people.length ? commonCharge / people.length : 0;
+      const baseHeader = (applyCommon && commonCharge > 0) ? "Base (incl. common)" : "Base";
+
+      const showStaffCol = applyStaff;
+      const showSvcCol   = applySvc;
+      const showGstCol   = applyGst;
+
+      let headerCols = `
+        <th>Name</th>
+        <th>${baseHeader}</th>
+      `;
+      if (showStaffCol) headerCols += `<th>After Staff (${staffPct}%)</th>`;
+      if (showSvcCol)   headerCols += `<th>After Svc</th>`;
+      if (showGstCol)   headerCols += `<th>After GST</th>`;
+      headerCols += `<th>Total</th>`;
+
       let tableHTML = `
         <div class="table-wrapper">
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Base (incl. common)</th>
-                <th>${staffLabel}</th>
-                <th>After Svc</th>
-                <th>After GST</th>
-                <th>Total</th>
+                ${headerCols}
               </tr>
             </thead>
             <tbody>
       `;
 
-      const perCommon = people.length ? commonCharge / people.length : 0;
-
       people.forEach(p => {
         const baseWithCommon = p.amt + perCommon;
         const share = baseWithCommon / baseTotal;
 
-        const afterStaff = baseWithCommon * (1 - staffRate);
+        const afterStaffStep = applyStaff ? baseWithCommon * (1 - staffRate) : baseWithCommon;
         const svcShare = svcTotal * share;
-        const afterSvc = afterStaff + svcShare;
+        const afterSvcStep = applySvc ? afterStaffStep + svcShare : afterStaffStep;
         const gstShare = gstTotal * share;
-        const afterGst = afterSvc + gstShare;
+        const afterGstStep = applyGst ? afterSvcStep + gstShare : afterSvcStep;
 
-        tableHTML += `
-          <tr>
-            <td>${p.name}</td>
-            <td>$${baseWithCommon.toFixed(2)}</td>
-            <td>$${afterStaff.toFixed(2)}</td>
-            <td>$${afterSvc.toFixed(2)}</td>
-            <td>$${afterGst.toFixed(2)}</td>
-            <td><strong>$${afterGst.toFixed(2)}</strong></td>
-          </tr>
+        let rowCols = `
+          <td>${p.name}</td>
+          <td>$${baseWithCommon.toFixed(2)}</td>
         `;
+        if (showStaffCol) rowCols += `<td>$${afterStaffStep.toFixed(2)}</td>`;
+        if (showSvcCol)   rowCols += `<td>$${afterSvcStep.toFixed(2)}</td>`;
+        if (showGstCol)   rowCols += `<td>$${afterGstStep.toFixed(2)}</td>`;
+        rowCols += `<td><strong>$${afterGstStep.toFixed(2)}</strong></td>`;
+
+        tableHTML += `<tr>${rowCols}</tr>`;
       });
 
       tableHTML += `
@@ -743,17 +635,11 @@
         billTitle,
         staffPct, svcPct, gstPct,
         applyStaff, applySvc, applyGst,
-        commonCharge,
+        commonCharge: commonChargeVal,
+        applyCommon,
         people,
       };
       saveCurrentState(currentState);
-
-      // Save to bill history
-      addBillToHistory({
-        ...currentState,
-        grandTotal,
-        timestamp: Date.now(),
-      });
 
       // Scroll to summary (nice on mobile)
       document.getElementById("summaryTotals")
@@ -770,10 +656,11 @@
         document.getElementById("staffPct").value  = saved.staffPct ?? 10;
         document.getElementById("svcPct").value    = saved.svcPct   ?? 10;
         document.getElementById("gstPct").value    = saved.gstPct   ?? 9;
-        document.getElementById("applyStaff").checked = !!saved.applyStaff;
-        document.getElementById("applySvc").checked   = !!saved.applySvc;
-        document.getElementById("applyGst").checked   = !!saved.applyGst;
-        document.getElementById("commonCharge").value = saved.commonCharge ?? 0;
+        document.getElementById("applyStaff").checked  = !!saved.applyStaff;
+        document.getElementById("applySvc").checked    = !!saved.applySvc;
+        document.getElementById("applyGst").checked    = !!saved.applyGst;
+        document.getElementById("commonCharge").value  = saved.commonCharge ?? 0;
+        document.getElementById("applyCommon").checked = saved.applyCommon !== false;
 
         container.innerHTML = "";
         saved.people.forEach(p => addPerson(p.name, p.amt));
@@ -781,8 +668,6 @@
         addPerson("Payee 1");
         addPerson("Payee 2");
       }
-
-      renderBillHistory();
     })();
   </script>
 </body>
