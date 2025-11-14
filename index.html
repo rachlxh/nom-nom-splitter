@@ -268,14 +268,40 @@
     }
 
     .suggestion-item {
-      padding: 8px 10px;
+      padding: 6px 8px;
       cursor: pointer;
       font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
     }
 
     .suggestion-item:hover {
       background: #eef2ff;
       color: var(--accent);
+    }
+
+    .suggest-name {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .suggest-remove {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 999px;
+    }
+
+    .suggest-remove:hover {
+      background: #fee2e2;
+      color: var(--danger);
     }
 
     /* Mobile tweaks */
@@ -386,7 +412,7 @@
   </div>
 
   <script>
-    /* ---------- Payee history helpers (most used first, no count shown) ---------- */
+    /* ---------- Payee history (most used first, deletable) ---------- */
 
     function loadPayeeHistory() {
       try {
@@ -421,6 +447,14 @@
       savePayeeHistory(history);
     }
 
+    function removePayeeFromHistory(name) {
+      name = (name || "").trim();
+      if (!name) return;
+      let history = loadPayeeHistory();
+      history = history.filter(h => h.name.toLowerCase() !== name.toLowerCase());
+      savePayeeHistory(history);
+    }
+
     function clearSuggestions() {
       document.querySelectorAll(".suggestion-box").forEach(b => b.remove());
     }
@@ -446,13 +480,29 @@
       list.forEach(h => {
         const item = document.createElement("div");
         item.className = "suggestion-item";
-        item.textContent = h.name;
-        item.onclick = (e) => {
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "suggest-name";
+        nameSpan.textContent = h.name;
+        nameSpan.onclick = (e) => {
           e.stopPropagation();
           inputEl.value = h.name;
           savePayeeName(h.name);
           clearSuggestions();
         };
+
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "suggest-remove";
+        removeBtn.textContent = "✕";
+        removeBtn.onclick = (e) => {
+          e.stopPropagation();
+          removePayeeFromHistory(h.name);
+          showSuggestions(inputEl); // re-render
+        };
+
+        item.appendChild(nameSpan);
+        item.appendChild(removeBtn);
         box.appendChild(item);
       });
 
@@ -479,6 +529,21 @@
         return JSON.parse(raw);
       } catch {
         return null;
+      }
+    }
+
+    /* ---------- Helper: auto-disable toggles when % = 0 ---------- */
+
+    function updateToggleFromPct(pctInputId, checkboxId) {
+      const pctInput = document.getElementById(pctInputId);
+      const checkbox = document.getElementById(checkboxId);
+      const val = parseFloat(pctInput.value) || 0;
+
+      if (val <= 0) {
+        checkbox.checked = false;
+        checkbox.disabled = true;
+      } else {
+        checkbox.disabled = false;
       }
     }
 
@@ -511,10 +576,39 @@
       const gstPct   = +document.getElementById("gstPct").value   || 0;
       const commonChargeVal = +document.getElementById("commonCharge").value || 0;
 
-      const applyStaff  = document.getElementById("applyStaff").checked;
-      const applySvc    = document.getElementById("applySvc").checked;
-      const applyGst    = document.getElementById("applyGst").checked;
+      let applyStaff  = document.getElementById("applyStaff").checked;
+      let applySvc    = document.getElementById("applySvc").checked;
+      let applyGst    = document.getElementById("applyGst").checked;
       const applyCommon = document.getElementById("applyCommon").checked;
+
+      const staffCheckbox = document.getElementById("applyStaff");
+      const svcCheckbox   = document.getElementById("applySvc");
+      const gstCheckbox   = document.getElementById("applyGst");
+
+      // 0% auto-treat as not applied (override checkbox, disable it)
+      if (staffPct <= 0) {
+        applyStaff = false;
+        staffCheckbox.checked = false;
+        staffCheckbox.disabled = true;
+      } else {
+        staffCheckbox.disabled = false;
+      }
+
+      if (svcPct <= 0) {
+        applySvc = false;
+        svcCheckbox.checked = false;
+        svcCheckbox.disabled = true;
+      } else {
+        svcCheckbox.disabled = false;
+      }
+
+      if (gstPct <= 0) {
+        applyGst = false;
+        gstCheckbox.checked = false;
+        gstCheckbox.disabled = true;
+      } else {
+        gstCheckbox.disabled = false;
+      }
 
       const staffRate = applyStaff ? staffPct / 100 : 0;
       const svcRate   = applySvc   ? svcPct   / 100 : 0;
@@ -551,7 +645,7 @@
 
       // Summary
       let summaryHtml = "";
-      if (commonCharge > 0) {
+      if (commonCharge > 0 && applyCommon) {
         summaryHtml += `
           <div class="summary-row"><span>Items subtotal</span> <strong>$${baseItemsTotal.toFixed(2)}</strong></div>
           <div class="summary-row"><span>Common charge (shared)</span> <strong>$${commonCharge.toFixed(2)}</strong></div>
@@ -574,8 +668,13 @@
       document.getElementById("summaryTitle").textContent = billTitle || "";
 
       // Per-person breakdown
-      const perCommon = people.length ? commonCharge / people.length : 0;
-      const baseHeader = (applyCommon && commonCharge > 0) ? "Base (incl. common)" : "Base";
+      const perCommon = (applyCommon && commonCharge > 0 && people.length)
+        ? commonCharge / people.length
+        : 0;
+
+      const baseHeader = (applyCommon && commonCharge > 0)
+        ? "Base (incl. common)"
+        : "Base";
 
       const showStaffCol = applyStaff;
       const showSvcCol   = applySvc;
@@ -605,11 +704,22 @@
         const baseWithCommon = p.amt + perCommon;
         const share = baseWithCommon / baseTotal;
 
-        const afterStaffStep = applyStaff ? baseWithCommon * (1 - staffRate) : baseWithCommon;
+        let afterStaffStep = baseWithCommon;
+        if (showStaffCol) {
+          afterStaffStep = baseWithCommon * (1 - staffRate);
+        }
+
         const svcShare = svcTotal * share;
-        const afterSvcStep = applySvc ? afterStaffStep + svcShare : afterStaffStep;
+        let afterSvcStep = afterStaffStep;
+        if (showSvcCol) {
+          afterSvcStep = afterStaffStep + svcShare;
+        }
+
         const gstShare = gstTotal * share;
-        const afterGstStep = applyGst ? afterSvcStep + gstShare : afterSvcStep;
+        let afterGstStep = afterSvcStep;
+        if (showGstCol) {
+          afterGstStep = afterSvcStep + gstShare;
+        }
 
         let rowCols = `
           <td>${p.name}</td>
@@ -668,6 +778,19 @@
         addPerson("Payee 1");
         addPerson("Payee 2");
       }
+
+      // Attach listeners so 0% auto-disables the toggles live
+      document.getElementById("staffPct")
+        .addEventListener("input", () => updateToggleFromPct("staffPct", "applyStaff"));
+      document.getElementById("svcPct")
+        .addEventListener("input", () => updateToggleFromPct("svcPct", "applySvc"));
+      document.getElementById("gstPct")
+        .addEventListener("input", () => updateToggleFromPct("gstPct", "applyGst"));
+
+      // Run once on load to sync state
+      updateToggleFromPct("staffPct", "applyStaff");
+      updateToggleFromPct("svcPct", "applySvc");
+      updateToggleFromPct("gstPct", "applyGst");
     })();
   </script>
 </body>
