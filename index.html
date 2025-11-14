@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nom-Nom Splitter</title>
+
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --accent: #6366f1;
+      --accent-soft: #eef2ff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --danger: #ef4444;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe, #eef2ff 30%, #f9fafb 70%);
+      color: var(--text-main);
+    }
+
+    .layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 18px -5px rgba(15,23,42,0.1);
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
+      margin-top: 0;
+    }
+
+    .title-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ecfdf3;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      float: right;
+      margin-top: -40px;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      transition: 0.15s;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(99,102,241,0.3);
+      background: #ffffff;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    .checkbox-row {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .three-col { grid-template-columns: 1fr; }
+    }
+
+    .person-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: center;
+    }
+
+    .remove-btn {
+      background: #fee2e2;
+      color: var(--danger);
+      border: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .primary-btn {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .primary-btn:hover { background: #4f46e5; }
+
+    .secondary-btn {
+      padding: 8px 14px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      cursor: pointer;
+    }
+
+    .summary-box {
+      border-top: 1px dashed var(--border);
+      padding-top: 16px;
+      margin-top: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .pill-total {
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 999px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .title-summary-display {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #4f46e5;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 16px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 8px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    th {
+      background: #f9fafb;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    td strong { color: var(--accent); }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- LEFT PANEL -->
+    <div class="panel">
+      <h1>Nom-Nom Splitter 🍽️</h1>
+      <div class="title-sub">Enter payees + charges. Summary appears on the right.</div>
+      <div class="badge">by Raa 🦖</div>
+
+      <h2>Bill Title</h2>
+      <input id="billTitle" type="text" placeholder="e.g. Dinner at Beauty in the Pot" />
+
+      <h2>Bill Settings</h2>
+
+      <div class="three-col">
+        <div>
+          <label>Staff Discount (%)</label>
+          <input id="staffPct" type="number" step="0.01" value="10" />
+          <div class="checkbox-row">
+            <input id="applyStaff" type="checkbox" checked /> Apply
+          </div>
+        </div>
+
+        <div>
+          <label>Service Charge (%)</label>
+          <input id="svcPct" type="number" step="0.01" value="10" />
+          <div class="checkbox-row">
+            <input id="applySvc" type="checkbox" checked /> Apply
+          </div>
+        </div>
+
+        <div>
+          <label>GST (%)</label>
+          <input id="gstPct" type="number" step="0.01" value="9" />
+          <div class="checkbox-row">
+            <input id="applyGst" type="checkbox" checked /> Apply
+          </div>
+        </div>
+      </div>
+
+      <h2>Payees</h2>
+      <div id="peopleContainer"></div>
+
+      <button class="secondary-btn" onclick="addPerson()">+ Add Person</button>
+      <button class="primary-btn" onclick="calculate()">Calculate</button>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="panel">
+      <h2>Summary</h2>
+
+      <div id="summaryTotals" class="summary-box"></div>
+
+      <div id="summaryTitle" class="title-summary-display"></div>
+
+      <div id="perPersonTable"></div>
+    </div>
+  </div>
+
+  <script>
+    function addPerson(name = "", amount = "") {
+      const row = document.createElement("div");
+      row.className = "person-row";
+      row.innerHTML = `
+        <input type="text" class="name-input" placeholder="Name" value="${name}">
+        <input type="number" class="amount-input" placeholder="Base amount" step="0.01" value="${amount}">
+        <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+      `;
+      document.getElementById("peopleContainer").appendChild(row);
+    }
+
+    function calculate() {
+      const billTitle = document.getElementById("billTitle").value;
+
+      const staffPct = +document.getElementById("staffPct").value || 0;
+      const svcPct   = +document.getElementById("svcPct").value || 0;
+      const gstPct   = +document.getElementById("gstPct").value || 0;
+
+      const staffRate = document.getElementById("applyStaff").checked ? staffPct / 100 : 0;
+      const svcRate   = document.getElementById("applySvc").checked   ? svcPct / 100   : 0;
+      const gstRate   = document.getElementById("applyGst").checked   ? gstPct / 100   : 0;
+
+      const rows = document.querySelectorAll(".person-row");
+      const people = [];
+      let baseTotal = 0;
+
+      rows.forEach((row, i) => {
+        const name = row.querySelector(".name-input").value || `Person ${i + 1}`;
+        const amt = parseFloat(row.querySelector(".amount-input").value) || 0;
+
+        people.push({ name, amt });
+        baseTotal += amt;
+      });
+
+      if (people.length === 0 || baseTotal <= 0) {
+        alert("Please enter valid payees & amounts.");
+        return;
+      }
+
+      const totalAfterStaff = baseTotal * (1 - staffRate);
+      const svcTotal = totalAfterStaff * svcRate;
+      const gstTotal = (totalAfterStaff + svcTotal) * gstRate;
+      const grandTotal = totalAfterStaff + svcTotal + gstTotal;
+
+      document.getElementById("summaryTotals").innerHTML = `
+        <div class="summary-row"><span>Base Total</span> <strong>$${baseTotal.toFixed(2)}</strong></div>
+        <div class="summary-row"><span>After Staff Discount</span> <strong>$${totalAfterStaff.toFixed(2)}</strong></div>
+        <div class="summary-row"><span>Service Charge</span> <strong>$${svcTotal.toFixed(2)}</strong></div>
+        <div class="summary-row"><span>GST</span> <strong>$${gstTotal.toFixed(2)}</strong></div>
+        <div class="summary-row"><span>Grand Total</span> <span class="pill-total">$${grandTotal.toFixed(2)}</span></div>
+      `;
+
+      document.getElementById("summaryTitle").textContent = billTitle || "";
+
+      const staffLabel = `After Staff (${staffPct}%)`;
+
+      let tableHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Base</th>
+              <th>${staffLabel}</th>
+              <th>After Svc</th>
+              <th>After GST</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      people.forEach(p => {
+        const share = p.amt / baseTotal;
+
+        const afterStaff = p.amt * (1 - staffRate);
+        const svcShare = svcTotal * share;
+        const afterSvc = afterStaff + svcShare;
+        const gstShare = gstTotal * share;
+        const afterGst = afterSvc + gstShare;
+
+        tableHTML += `
+          <tr>
+            <td>${p.name}</td>
+            <td>$${p.amt.toFixed(2)}</td>
+            <td>$${afterStaff.toFixed(2)}</td>
+            <td>$${afterSvc.toFixed(2)}</td>
+            <td>$${afterGst.toFixed(2)}</td>
+            <td><strong>$${afterGst.toFixed(2)}</strong></td>
+          </tr>
+        `;
+      });
+
+      tableHTML += "</tbody></table>";
+      document.getElementById("perPersonTable").innerHTML = tableHTML;
+    }
+
+    addPerson("Payee 1");
+    addPerson("Payee 2");
+  </script>
+</body>
+</html>
