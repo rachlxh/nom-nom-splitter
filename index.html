@@ -804,33 +804,23 @@
       document.getElementById("summaryTitle").textContent = billTitle || "";
 
       // Per-person breakdown
-      const perCommon = (applyCommon && commonCharge > 0 && people.length)
+      const includeCommonColumns = applyCommon && commonCharge > 0 && people.length;
+      const perCommon = includeCommonColumns
         ? commonCharge / people.length
         : 0;
-
-      let headerCols = `<th>Name</th>`;
-let includeBaseColumns = applyCommon && commonCharge > 0;
-
-if (includeBaseColumns) {
-  headerCols += `
-    <th>Base (own items)</th>
-    <th>Common share</th>
-    <th>Base total</th>
-  `;
-} else {
-  headerCols += `<th>Base</th>`;
-}
 
       const showStaffCol = applyStaff;
       const showSvcCol   = applySvc;
       const showGstCol   = applyGst;
 
-      let headerCols = `
-        <th>Name</th>
-        <th>${baseHeaderOwn}</th>
-      `;
-      if (baseHeaderCommon) headerCols += `<th>${baseHeaderCommon}</th>`;
-      headerCols += `<th>${baseHeaderTotal}</th>`;
+      let headerCols = `<th>Name</th>`;
+      if (includeCommonColumns) {
+        headerCols += `
+          <th>Base (own items)</th>
+          <th>Common share</th>
+          <th>Base total</th>
+        `;
+      }
       if (showStaffCol) headerCols += `<th>After Staff (${staffPct}%)</th>`;
       if (showSvcCol)   headerCols += `<th>After Svc</th>`;
       if (showGstCol)   headerCols += `<th>After GST</th>`;
@@ -881,15 +871,14 @@ if (includeBaseColumns) {
 
         let rowCols = `<td>${p.name}</td>`;
 
-if (includeBaseColumns) {
-  rowCols += `
-    <td>$${ownBase.toFixed(2)}</td>
-    <td>$${commonShare.toFixed(2)}</td>
-    <td>$${baseWithCommon.toFixed(2)}</td>
-  `;
-} else {
-  rowCols += `<td>$${ownBase.toFixed(2)}</td>`;
-}
+        if (includeCommonColumns) {
+          rowCols += `
+            <td>$${ownBase.toFixed(2)}</td>
+            <td>$${commonShare.toFixed(2)}</td>
+            <td>$${baseWithCommon.toFixed(2)}</td>
+          `;
+        }
+
         if (showStaffCol) rowCols += `<td>$${afterStaffStep.toFixed(2)}</td>`;
         if (showSvcCol)   rowCols += `<td>$${afterSvcStep.toFixed(2)}</td>`;
         if (showGstCol)   rowCols += `<td>$${afterGstStep.toFixed(2)}</td>`;
@@ -1021,5 +1010,3 @@ if (includeBaseColumns) {
   </script>
 </body>
 </html>
-
-
