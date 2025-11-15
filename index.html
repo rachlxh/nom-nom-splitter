@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <title>Nom-Nom Splitter</title>
 
-  <!-- Mobile friendly -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -30,7 +29,6 @@
       font-size: 16px;
     }
 
-    /* Layout */
     .layout {
       max-width: 1200px;
       margin: 0 auto;
@@ -51,26 +49,10 @@
       box-shadow: 0 12px 18px -5px rgba(15,23,42,0.1);
     }
 
-    h1 {
-      font-size: 28px;
-      margin-bottom: 6px;
-      margin-top: 0;
-    }
+    h1 { font-size: 28px; margin-bottom: 6px; margin-top: 0; }
+    h2 { font-size: 19px; margin-top: 18px; margin-bottom: 6px; display:flex;align-items:center;gap:6px; }
 
-    h2 {
-      font-size: 19px;
-      margin-top: 18px;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .title-sub {
-      font-size: 15px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
+    .title-sub { font-size: 15px; color: var(--text-muted); margin-bottom: 20px; }
 
     .badge {
       font-size: 12px;
@@ -79,8 +61,8 @@
       background: #ecfdf3;
       color: #166534;
       border: 1px solid #bbf7d0;
-      float: right;
-      margin-top: -40px;
+      float:right;
+      margin-top:-40px;
     }
 
     input[type="text"], input[type="number"] {
@@ -96,315 +78,144 @@
     input:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 1px rgba(99,102,241,0.3);
-      background: #ffffff;
-      outline: none;
+      background:#ffffff;
+      outline:none;
     }
 
-    label {
-      display: block;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    small.helper {
-      display: block;
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
+    label { display:block; margin-top:8px; font-size:14px; }
+    small.helper { display:block; font-size:13px; color:var(--text-muted); margin-top:2px; }
 
     .checkbox-row {
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
+      margin-top:6px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:14px;
     }
 
     .three-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 8px;
-      padding-bottom: 12px;
-      border-bottom: 1px dashed var(--border);
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:16px;
+      margin-bottom:8px;
+      padding-bottom:12px;
+      border-bottom:1px dashed var(--border);
     }
 
-    @media (max-width: 700px) {
-      .three-col { grid-template-columns: 1fr; }
-    }
+    @media (max-width:700px) { .three-col { grid-template-columns:1fr; } }
 
-    .section-divider {
-      border-top: 1px dashed var(--border);
-      margin-top: 12px;
-      padding-top: 12px;
-    }
+    .section-divider { border-top:1px dashed var(--border); margin-top:12px; padding-top:12px; }
 
     .person-row {
-      display: grid;
-      grid-template-columns: 1.3fr 1.1fr auto;
-      gap: 8px;
-      margin-top: 8px;
-      align-items: center;
+      display:grid;
+      grid-template-columns:1.3fr 1.1fr auto;
+      gap:8px;
+      margin-top:8px;
+      align-items:center;
     }
 
     .remove-btn {
-      background: #fee2e2;
-      color: var(--danger);
-      border: none;
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
+      background:#fee2e2;
+      color:var(--danger);
+      border:none;
+      padding:4px 10px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:13px;
     }
 
     .primary-btn {
-      margin-top: 10px;
-      padding: 11px;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      background: var(--accent);
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
+      margin-top:10px;
+      padding:11px;
+      width:100%;
+      border:none;
+      border-radius:10px;
+      background:var(--accent);
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.2s;
     }
 
-    .primary-btn:hover { background: #4f46e5; }
+    .primary-btn:hover { background:#4f46e5; }
 
     .secondary-btn, .text-btn {
-      padding: 6px 10px;
-      margin-top: 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #f9fafb;
-      cursor: pointer;
-      font-size: 14px;
+      padding:6px 10px;
+      margin-top:10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#f9fafb;
+      cursor:pointer;
+      font-size:14px;
     }
 
-    .secondary-btn:hover, .text-btn:hover {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
+    .text-btn { background:transparent; }
 
-    .text-btn {
-      padding-inline: 10px;
-      background: transparent;
-      border-radius: 999px;
-    }
-
-    /* Sticky calculate on mobile */
-    .sticky-calc {
-      margin-top: 14px;
-    }
-
-    @media (max-width: 700px) {
+    @media (max-width:700px) {
       .sticky-calc {
-        position: sticky;
-        bottom: 0;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        background: linear-gradient(to top, rgba(255,255,255,0.98), rgba(255,255,255,0.88));
-        z-index: 20;
+        position:sticky;
+        bottom:0;
+        padding:8px 0;
+        background:linear-gradient(to top,rgba(255,255,255,0.98),rgba(255,255,255,0.88));
+        z-index:20;
       }
     }
 
-    /* Summary styles */
-    .summary-box {
-      border-top: 1px dashed var(--border);
-      padding-top: 14px;
-      margin-top: 10px;
-    }
+    .summary-box { border-top:1px dashed var(--border); padding-top:14px; margin-top:10px; }
+    .summary-row { display:flex; justify-content:space-between; font-size:15px; margin-bottom:4px; }
+    .summary-row.grand { background:var(--accent-soft); padding:6px 10px; border-radius:10px; margin-top:8px; }
+    .pill-total { padding:4px 12px; background:#4f46e5; color:white; border-radius:999px; font-weight:600; }
 
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
+    .title-summary-display { margin-top:16px; font-size:17px; font-weight:600; color:#4f46e5; }
 
-    .summary-row.grand {
-      background: var(--accent-soft);
-      padding: 6px 10px;
-      border-radius: 10px;
-      margin-top: 8px;
-    }
+    .table-wrapper { width:100%; overflow-x:auto; margin-top:16px; }
+    table { width:100%; border-collapse:collapse; font-size:14px; min-width:520px; }
+    th,td { padding:8px; border-bottom:1px solid #f1f5f9; text-align:left; }
+    th { background:#f9fafb; font-weight:600; }
 
-    .summary-note {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+    td strong { color:var(--accent); }
 
-    .pill-total {
-      padding: 4px 12px;
-      border-radius: 999px;
-      background: #4f46e5;
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .title-summary-display {
-      margin-top: 16px;
-      font-size: 17px;
-      font-weight: 600;
-      color: #4f46e5;
-    }
-
-    /* Table */
-    .table-wrapper {
-      width: 100%;
-      overflow-x: auto;
-      margin-top: 16px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-      min-width: 520px;
-    }
-
-    th, td {
-      padding: 8px;
-      border-bottom: 1px solid #f1f5f9;
-      text-align: left;
-    }
-
-    th {
-      background: #f9fafb;
-      font-weight: 600;
-    }
-
-    td strong { color: var(--accent); }
-
-    /* Suggestions dropdown */
     .suggestion-box {
-      border: 1px solid var(--border);
-      background: #ffffff;
-      border-radius: 8px;
-      margin-top: 4px;
-      box-shadow: 0 4px 12px rgba(15,23,42,0.12);
-      max-height: 180px;
-      overflow-y: auto;
+      border:1px solid var(--border);
+      background:#ffffff;
+      border-radius:8px;
+      margin-top:4px;
+      box-shadow:0 4px 12px rgba(15,23,42,0.12);
+      max-height:180px;
+      overflow-y:auto;
     }
 
     .suggestion-item {
-      padding: 6px 8px;
-      cursor: pointer;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
+      padding:6px 8px;
+      cursor:pointer;
+      font-size:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
 
-    .suggestion-item:hover {
-      background: #eef2ff;
-      color: var(--accent);
-    }
-
-    .suggest-name {
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+    .suggest-item:hover { background:#eef2ff; color:var(--accent); }
 
     .suggest-remove {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 13px;
-      cursor: pointer;
-      padding: 2px 6px;
-      border-radius: 999px;
+      border:none;
+      background:transparent;
+      color:var(--text-muted);
+      font-size:13px;
+      cursor:pointer;
     }
 
-    .suggest-remove:hover {
-      background: #fee2e2;
-      color: var(--danger);
-    }
+    .input-with-unit { position:relative; display:flex; align-items:center; }
+    .input-with-unit input { padding-right:32px; }
+    .input-unit { position:absolute; right:10px; color:var(--text-muted); font-size:14px; }
 
-    /* Input with unit */
-    .input-with-unit {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
+    .copy-row { display:flex; gap:8px; margin-top:10px; }
+    .copy-btn { border-radius:999px; padding:6px 12px; background:#f9fafb; border:1px solid var(--border); cursor:pointer; }
 
-    .input-with-unit input {
-      padding-right: 32px;
-    }
-
-    .input-unit {
-      position: absolute;
-      right: 10px;
-      font-size: 14px;
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    /* Copy buttons */
-    .copy-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .copy-btn {
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #f9fafb;
-      padding: 6px 12px;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .copy-btn:hover {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-
-    /* Payees header */
-    .payees-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    /* Mobile tweaks */
-    @media (max-width: 600px) {
-      body {
-        padding: 12px;
-      }
-
-      .panel {
-        padding: 16px;
-        border-radius: 14px;
-      }
-
-      h1 {
-        font-size: 24px;
-      }
-
-      .title-sub {
-        font-size: 14px;
-      }
-
-      .badge {
-        float: none;
-        margin-top: 8px;
-        display: inline-block;
-      }
-
-      table {
-        font-size: 13px;
-      }
+    @media (max-width:600px) {
+      body { padding:12px; }
+      .panel { padding:16px; border-radius:14px; }
+      h1 { font-size:24px; }
+      th,td { font-size:13px; }
     }
   </style>
 </head>
@@ -418,11 +229,9 @@
       <div class="title-sub">Enter payees + charges. Summary appears on the right.</div>
       <div class="badge">by Raa 🦖</div>
 
-      <!-- Bill title -->
       <h2>📋 Bill Title</h2>
       <input id="billTitle" type="text" placeholder="e.g. GoNoodle, HaiDiLao, Team Lunch" />
 
-      <!-- Bill settings -->
       <div class="section-divider">
         <h2>⚙️ Bill Settings</h2>
 
@@ -463,27 +272,31 @@
         </div>
       </div>
 
-      <!-- Common charge -->
       <div class="section-divider">
         <h2>🔁 Common Charge</h2>
         <label>Shared amount (split equally)</label>
+
         <div class="input-with-unit">
           <input id="commonCharge" type="number" step="0.01" placeholder="e.g. 20 for shared dish" />
           <span class="input-unit">$</span>
         </div>
+
         <div class="checkbox-row">
           <input id="applyCommon" type="checkbox" checked />
           <span>Apply common charge</span>
         </div>
-        <small class="helper">If applied, this amount will be divided equally across all payees and added to their base.</small>
+
+        <small class="helper">
+          If applied, amount is divided equally across all payees and added to Base.
+        </small>
       </div>
 
-      <!-- Payees -->
       <div class="section-divider">
         <div class="payees-header">
           <h2>👥 Payees</h2>
           <button type="button" class="text-btn" id="togglePayeesBtn" onclick="togglePayees()">Hide list</button>
         </div>
+
         <div id="payeesSection">
           <div id="peopleContainer"></div>
           <button class="secondary-btn" onclick="addPerson()">+ Add Person</button>
@@ -500,513 +313,434 @@
       <h2>📊 Summary</h2>
 
       <div id="summaryTotals" class="summary-box"></div>
-
       <div id="summaryTitle" class="title-summary-display"></div>
 
       <div class="copy-row" id="copyRow" style="display:none;">
-        <button class="copy-btn" type="button" onclick="copyBreakdown()">Copy breakdown</button>
+        <button class="copy-btn" onclick="copyBreakdown()">Copy breakdown</button>
       </div>
 
       <div id="perPersonTable"></div>
     </div>
   </div>
 
-  <script>
-    let lastResult = null; // store last calculation for copy/share
+<script>
+let lastResult = null;
 
-    /* ---------- Payee history (most used first, deletable) ---------- */
+/* ---------------- PAYEE HISTORY ---------------- */
 
-    function loadPayeeHistory() {
-      try {
-        return JSON.parse(localStorage.getItem("payeeHistoryV2") || "[]");
-      } catch {
-        return [];
-      }
-    }
+function loadPayeeHistory() {
+  try { return JSON.parse(localStorage.getItem("payeeHistoryV2") || "[]"); }
+  catch { return []; }
+}
 
-    function savePayeeHistory(history) {
-      localStorage.setItem("payeeHistoryV2", JSON.stringify(history));
-    }
+function savePayeeHistory(h) {
+  localStorage.setItem("payeeHistoryV2", JSON.stringify(h));
+}
 
-    function savePayeeName(name) {
-      name = (name || "").trim();
-      if (!name) return;
+function savePayeeName(name) {
+  name = (name || "").trim();
+  if (!name) return;
 
-      let history = loadPayeeHistory();
-      const lower = name.toLowerCase();
-      let existing = history.find(h => h.name.toLowerCase() === lower);
+  let history = loadPayeeHistory();
+  const lower = name.toLowerCase();
+  let exist = history.find(h => h.name.toLowerCase() === lower);
 
-      if (existing) {
-        existing.count += 1;
-        existing.name = name;
-      } else {
-        history.push({ name, count: 1 });
-      }
+  if (exist) {
+    exist.count++;
+    exist.name = name;
+  } else {
+    history.push({ name, count: 1 });
+  }
 
-      history.sort((a, b) => b.count - a.count);
-      if (history.length > 30) history = history.slice(0, 30);
+  history.sort((a,b) => b.count - a.count);
+  if (history.length > 30) history = history.slice(0,30);
 
-      savePayeeHistory(history);
-    }
+  savePayeeHistory(history);
+}
 
-    function removePayeeFromHistory(name) {
-      name = (name || "").trim();
-      if (!name) return;
-      let history = loadPayeeHistory();
-      history = history.filter(h => h.name.toLowerCase() !== name.toLowerCase());
-      savePayeeHistory(history);
-    }
+function removePayeeFromHistory(name) {
+  let h = loadPayeeHistory();
+  h = h.filter(x => x.name.toLowerCase() !== name.toLowerCase());
+  savePayeeHistory(h);
+}
 
-    function clearSuggestions() {
-      document.querySelectorAll(".suggestion-box").forEach(b => b.remove());
-    }
+function clearSuggestions() {
+  document.querySelectorAll(".suggestion-box").forEach(e => e.remove());
+}
 
-    function showSuggestions(inputEl) {
+function showSuggestions(inputEl) {
+  clearSuggestions();
+  const history = loadPayeeHistory();
+  if (!history.length) return;
+
+  const q = (inputEl.value || "").toLowerCase();
+  let list = history;
+  if (q) {
+    const filtered = history.filter(x => x.name.toLowerCase().includes(q));
+    if (filtered.length) list = filtered;
+  }
+
+  const box = document.createElement("div");
+  box.className = "suggestion-box";
+
+  list.forEach(h => {
+    const item = document.createElement("div");
+    item.className = "suggestion-item";
+
+    const nameSpan = document.createElement("span");
+    nameSpan.className = "suggest-name";
+    nameSpan.textContent = h.name;
+    nameSpan.onclick = (e) => {
+      e.stopPropagation();
+      inputEl.value = h.name;
+      savePayeeName(h.name);
       clearSuggestions();
-      const history = loadPayeeHistory();
-      if (!history.length) return;
+    };
 
-      const query = (inputEl.value || "").trim().toLowerCase();
-      let list = history;
+    const rem = document.createElement("button");
+    rem.className = "suggest-remove";
+    rem.textContent = "✕";
+    rem.onclick = (e) => {
+      e.stopPropagation();
+      removePayeeFromHistory(h.name);
+      showSuggestions(inputEl);
+    };
 
-      if (query) {
-        const filtered = history.filter(h =>
-          h.name.toLowerCase().includes(query)
-        );
-        if (filtered.length) list = filtered;
-      }
+    item.appendChild(nameSpan);
+    item.appendChild(rem);
+    box.appendChild(item);
+  });
 
-      const box = document.createElement("div");
-      box.className = "suggestion-box";
+  inputEl.parentElement.appendChild(box);
+}
 
-      list.forEach(h => {
-        const item = document.createElement("div");
-        item.className = "suggestion-item";
+document.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("name-input") &&
+      !e.target.closest(".suggestion-box")) {
+    clearSuggestions();
+  }
+});
 
-        const nameSpan = document.createElement("span");
-        nameSpan.className = "suggest-name";
-        nameSpan.textContent = h.name;
-        nameSpan.onclick = (e) => {
-          e.stopPropagation();
-          inputEl.value = h.name;
-          savePayeeName(h.name);
-          clearSuggestions();
-        };
+/* ---------------- SAVE BILL STATE ---------------- */
 
-        const removeBtn = document.createElement("button");
-        removeBtn.type = "button";
-        removeBtn.className = "suggest-remove";
-        removeBtn.textContent = "✕";
-        removeBtn.onclick = (e) => {
-          e.stopPropagation();
-          removePayeeFromHistory(h.name);
-          showSuggestions(inputEl); // re-render
-        };
+function saveCurrentState(state) {
+  localStorage.setItem("billStateV1", JSON.stringify(state));
+}
 
-        item.appendChild(nameSpan);
-        item.appendChild(removeBtn);
-        box.appendChild(item);
-      });
+function loadCurrentState() {
+  try { return JSON.parse(localStorage.getItem("billStateV1")); }
+  catch { return null; }
+}
 
-      inputEl.parentElement.appendChild(box);
-    }
+/* ---------------- TOGGLE AUTO-DISABLE ---------------- */
 
-    document.addEventListener("click", (e) => {
-      if (!e.target.classList.contains("name-input") &&
-          !e.target.closest(".suggestion-box")) {
-        clearSuggestions();
-      }
-    });
+function updateToggleFromPct(pctId, chkId) {
+  const pct = parseFloat(document.getElementById(pctId).value) || 0;
+  const chk = document.getElementById(chkId);
 
-    /* ---------- Bill state (remember last bill) ---------- */
+  if (pct <= 0) {
+    chk.checked = false;
+    chk.disabled = true;
+  } else {
+    chk.disabled = false;
+  }
+}
 
-    function saveCurrentState(state) {
-      localStorage.setItem("billStateV1", JSON.stringify(state));
-    }
+/* ---------------- UI HELPERS ---------------- */
 
-    function loadCurrentState() {
-      try {
-        const raw = localStorage.getItem("billStateV1");
-        if (!raw) return null;
-        return JSON.parse(raw);
-      } catch {
-        return null;
-      }
-    }
+function togglePayees() {
+  const sec = document.getElementById("payeesSection");
+  const btn = document.getElementById("togglePayeesBtn");
+  const hide = sec.style.display === "none";
+  sec.style.display = hide ? "block" : "none";
+  btn.textContent = hide ? "Hide list" : "Show list";
+}
 
-    /* ---------- Helper: auto-disable toggles when % = 0 ---------- */
+/* ---------------- ADD PERSON ---------------- */
 
-    function updateToggleFromPct(pctInputId, checkboxId) {
-      const pctInput = document.getElementById(pctInputId);
-      const checkbox = document.getElementById(checkboxId);
-      const val = parseFloat(pctInput.value) || 0;
+function addPerson(name="", amount="") {
+  const row = document.createElement("div");
+  row.className = "person-row";
 
-      if (val <= 0) {
-        checkbox.checked = false;
-        checkbox.disabled = true;
-      } else {
-        checkbox.disabled = false;
-      }
-    }
+  row.innerHTML = `
+    <div>
+      <input type="text" class="name-input"
+             placeholder="Name"
+             value="${name}"
+             onfocus="showSuggestions(this)"
+             oninput="showSuggestions(this)"
+             onblur="savePayeeName(this.value)">
+    </div>
+    <div class="input-with-unit">
+      <input type="number" class="amount-input" placeholder="Base amount" step="0.01" value="${amount}">
+      <span class="input-unit">$</span>
+    </div>
+    <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+  `;
+  document.getElementById("peopleContainer").appendChild(row);
+}
 
-    /* ---------- UI Helpers ---------- */
+/* ---------------- CALCULATE ---------------- */
 
-    function togglePayees() {
-      const section = document.getElementById("payeesSection");
-      const btn = document.getElementById("togglePayeesBtn");
-      const isHidden = section.style.display === "none";
-      section.style.display = isHidden ? "block" : "none";
-      btn.textContent = isHidden ? "Hide list" : "Show list";
-    }
+function calculate() {
+  clearSuggestions();
 
-    /* ---------- Core UI logic ---------- */
+  const billTitle = document.getElementById("billTitle").value;
 
-    function addPerson(name = "", amount = "") {
-      const row = document.createElement("div");
-      row.className = "person-row";
+  const staffPct = +document.getElementById("staffPct").value || 0;
+  const svcPct   = +document.getElementById("svcPct").value   || 0;
+  const gstPct   = +document.getElementById("gstPct").value   || 0;
 
-      row.innerHTML = `
-        <div>
-          <input type="text"
-                 class="name-input"
-                 placeholder="Name"
-                 value="${name}"
-                 onfocus="showSuggestions(this)"
-                 oninput="showSuggestions(this)"
-                 onblur="savePayeeName(this.value)">
-        </div>
-        <div class="input-with-unit">
-          <input type="number" class="amount-input" placeholder="Base amount" step="0.01" value="${amount}">
-          <span class="input-unit">$</span>
-        </div>
-        <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>
+  const applyCommon = document.getElementById("applyCommon").checked;
+  const commonChargeVal = +document.getElementById("commonCharge").value || 0;
+
+  let applyStaff = document.getElementById("applyStaff").checked;
+  let applySvc   = document.getElementById("applySvc").checked;
+  let applyGst   = document.getElementById("applyGst").checked;
+
+  // Auto-disable 0%
+  updateToggleFromPct("staffPct","applyStaff");
+  updateToggleFromPct("svcPct","applySvc");
+  updateToggleFromPct("gstPct","applyGst");
+
+  const staffRate = applyStaff ? staffPct/100 : 0;
+  const svcRate   = applySvc   ? svcPct/100   : 0;
+  const gstRate   = applyGst   ? gstPct/100   : 0;
+
+  const commonCharge = applyCommon ? commonChargeVal : 0;
+
+  const rows = document.querySelectorAll(".person-row");
+  const people = [];
+  let baseItemsTotal = 0;
+
+  rows.forEach((row,i)=>{
+    const name = (row.querySelector(".name-input").value || "").trim() || `Person ${i+1}`;
+    const amt  = parseFloat(row.querySelector(".amount-input").value) || 0;
+
+    people.push({name,amt});
+    baseItemsTotal += amt;
+
+    savePayeeName(name);
+  });
+
+  if (people.length === 0 || (baseItemsTotal <= 0 && commonCharge <= 0)) {
+    alert("Please enter some amounts or a common charge.");
+    return;
+  }
+
+  const baseTotal = baseItemsTotal + commonCharge;
+  const totalAfterStaff = baseTotal * (1-staffRate);
+  const svcTotal = totalAfterStaff * svcRate;
+  const gstTotal = (totalAfterStaff + svcTotal)*gstRate;
+  const grandTotal = totalAfterStaff + svcTotal + gstTotal;
+
+  /* ---------------- SUMMARY ---------------- */
+
+  const eps = 0.00001;
+  let summary = "";
+
+  if (applyCommon && commonCharge > 0) {
+    summary += `
+      <div class="summary-row"><span>Items subtotal</span><strong>$${baseItemsTotal.toFixed(2)}</strong></div>
+      <div class="summary-row"><span>Common charge</span><strong>$${commonCharge.toFixed(2)}</strong></div>
+      <div class="summary-row"><span>Base total</span><strong>$${baseTotal.toFixed(2)}</strong></div>
+    `;
+  } else {
+    summary += `<div class="summary-row"><span>Base total</span><strong>$${baseTotal.toFixed(2)}</strong></div>`;
+  }
+
+  if (Math.abs(totalAfterStaff-baseTotal)>eps) {
+    summary += `<div class="summary-row"><span>After staff discount</span><strong>$${totalAfterStaff.toFixed(2)}</strong></div>`;
+  }
+
+  if (svcTotal>eps) {
+    summary += `<div class="summary-row"><span>Service charge</span><strong>$${svcTotal.toFixed(2)}</strong></div>`;
+  }
+
+  if (gstTotal>eps) {
+    summary += `<div class="summary-row"><span>GST</span><strong>$${gstTotal.toFixed(2)}</strong></div>`;
+  }
+
+  summary += `
+    <div class="summary-row grand">
+      <span>Grand total</span>
+      <span class="pill-total">$${grandTotal.toFixed(2)}</span>
+    </div>
+  `;
+
+  document.getElementById("summaryTotals").innerHTML = summary;
+  document.getElementById("summaryTitle").textContent = billTitle || "";
+
+  /* ---------------- TABLE ---------------- */
+
+  const includeCommonColumns = applyCommon && commonCharge>0 && people.length;
+  const perCommon = includeCommonColumns ? commonCharge / people.length : 0;
+
+  const showStaffCol = applyStaff;
+  const showSvcCol   = applySvc;
+  const showGstCol   = applyGst;
+
+  // HEADER
+  let headerCols = `<th>Name</th><th>Base</th>`;
+
+  if (includeCommonColumns) {
+    headerCols += `
+      <th>Common share</th>
+      <th>Base total</th>
+    `;
+  }
+
+  if (showStaffCol) headerCols += `<th>After Staff (${staffPct}%)</th>`;
+  if (showSvcCol)   headerCols += `<th>After Svc</th>`;
+  if (showGstCol)   headerCols += `<th>After GST</th>`;
+  headerCols += `<th>Total</th>`;
+
+  let tableHTML = `
+    <div class="table-wrapper">
+      <table>
+        <thead><tr>${headerCols}</tr></thead>
+        <tbody>
+  `;
+
+  const breakdown = [];
+
+  people.forEach(p=>{
+    const ownBase = p.amt;
+    const commonShare = perCommon;
+    const baseWithCommon = ownBase + commonShare;
+    const share = baseWithCommon / baseTotal;
+
+    let afterStaff = baseWithCommon;
+    if (showStaffCol) afterStaff = baseWithCommon * (1-staffRate);
+
+    const svcShare = svcTotal * share;
+    let afterSvc = afterStaff;
+    if (showSvcCol) afterSvc = afterStaff + svcShare;
+
+    const gstShare = gstTotal * share;
+    let afterGst = afterSvc;
+    if (showGstCol) afterGst = afterSvc + gstShare;
+
+    const finalTotal = afterGst;
+
+    breakdown.push({ name:p.name, total:finalTotal });
+
+    let rowCols = `
+      <td>${p.name}</td>
+      <td>$${ownBase.toFixed(2)}</td>
+    `;
+
+    if (includeCommonColumns) {
+      rowCols += `
+        <td>$${commonShare.toFixed(2)}</td>
+        <td>$${baseWithCommon.toFixed(2)}</td>
       `;
-      document.getElementById("peopleContainer").appendChild(row);
     }
 
-    function calculate() {
-      clearSuggestions(); // close any name dropdowns
+    if (showStaffCol) rowCols += `<td>$${afterStaff.toFixed(2)}</td>`;
+    if (showSvcCol)   rowCols += `<td>$${afterSvc.toFixed(2)}</td>`;
+    if (showGstCol)   rowCols += `<td>$${afterGst.toFixed(2)}</td>`;
 
-      const billTitle = document.getElementById("billTitle").value;
+    rowCols += `<td><strong>$${finalTotal.toFixed(2)}</strong></td>`;
 
-      const staffPct = +document.getElementById("staffPct").value || 0;
-      const svcPct   = +document.getElementById("svcPct").value   || 0;
-      const gstPct   = +document.getElementById("gstPct").value   || 0;
-      const commonChargeVal = +document.getElementById("commonCharge").value || 0;
+    tableHTML += `<tr>${rowCols}</tr>`;
+  });
 
-      let applyStaff  = document.getElementById("applyStaff").checked;
-      let applySvc    = document.getElementById("applySvc").checked;
-      let applyGst    = document.getElementById("applyGst").checked;
-      const applyCommon = document.getElementById("applyCommon").checked;
+  tableHTML += `</tbody></table></div>`;
+  document.getElementById("perPersonTable").innerHTML = tableHTML;
 
-      const staffCheckbox = document.getElementById("applyStaff");
-      const svcCheckbox   = document.getElementById("applySvc");
-      const gstCheckbox   = document.getElementById("applyGst");
+  /* ---------------- STORE RESULT FOR COPY ---------------- */
 
-      // 0% auto-treat as not applied (override checkbox, disable it)
-      if (staffPct <= 0) {
-        applyStaff = false;
-        staffCheckbox.checked = false;
-        staffCheckbox.disabled = true;
-      } else {
-        staffCheckbox.disabled = false;
-      }
+  lastResult = { billTitle:billTitle||"", breakdown, grandTotal };
 
-      if (svcPct <= 0) {
-        applySvc = false;
-        svcCheckbox.checked = false;
-        svcCheckbox.disabled = true;
-      } else {
-        svcCheckbox.disabled = false;
-      }
+  document.getElementById("copyRow").style.display = "flex";
 
-      if (gstPct <= 0) {
-        applyGst = false;
-        gstCheckbox.checked = false;
-        gstCheckbox.disabled = true;
-      } else {
-        gstCheckbox.disabled = false;
-      }
+  /* ---------------- SAVE STATE ---------------- */
 
-      const staffRate = applyStaff ? staffPct / 100 : 0;
-      const svcRate   = applySvc   ? svcPct   / 100 : 0;
-      const gstRate   = applyGst   ? gstPct   / 100 : 0;
+  saveCurrentState({
+    billTitle,
+    staffPct, svcPct, gstPct,
+    applyStaff, applySvc, applyGst,
+    commonCharge: commonChargeVal,
+    applyCommon,
+    people
+  });
 
-      const commonCharge = applyCommon ? commonChargeVal : 0;
+  /* ---------------- SCROLL ---------------- */
+  document.getElementById("summaryTotals")
+    .scrollIntoView({ behavior:"smooth" });
+}
 
-      const rows = document.querySelectorAll(".person-row");
-      const people = [];
-      let baseItemsTotal = 0;
+/* ---------------- COPY BREAKDOWN ---------------- */
 
-      rows.forEach((row, i) => {
-        const nameEl = row.querySelector(".name-input");
-        const amtEl  = row.querySelector(".amount-input");
+function copyTextToClipboard(text){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text)
+      .then(()=>alert("Copied to clipboard"));
+  } else {
+    const t = document.createElement("textarea");
+    t.value = text;
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand("copy");
+    document.body.removeChild(t);
+    alert("Copied to clipboard");
+  }
+}
 
-        const name = (nameEl.value || "").trim() || `Person ${i + 1}`;
-        const amt = parseFloat(amtEl.value) || 0;
+function copyBreakdown(){
+  if(!lastResult){ alert("Calculate first."); return; }
 
-        people.push({ name, amt });
-        baseItemsTotal += amt;
+  const {billTitle, breakdown, grandTotal} = lastResult;
+  let text="🍽 Nom-Nom Splitter";
+  if(billTitle) text+=" – "+billTitle;
+  text+="\n\n";
 
-        savePayeeName(name);
-      });
+  breakdown.forEach(p=>{
+    text+=`${p.name}: $${p.total.toFixed(2)}\n`;
+  });
+  text+=`\nGrand total: $${grandTotal.toFixed(2)}\n`;
 
-      if (people.length === 0 || (baseItemsTotal <= 0 && commonCharge <= 0)) {
-        alert("Please enter some amounts or a common charge.");
-        return;
-      }
+  copyTextToClipboard(text);
+}
 
-      const baseTotal = baseItemsTotal + commonCharge;
-      const totalAfterStaff = baseTotal * (1 - staffRate);
-      const svcTotal = totalAfterStaff * svcRate;
-      const gstTotal = (totalAfterStaff + svcTotal) * gstRate;
-      const grandTotal = totalAfterStaff + svcTotal + gstTotal;
+/* ---------------- INIT ---------------- */
 
-      // Summary (hide $0 rows)
-      const eps = 0.00001;
-      let summaryHtml = "";
+(function(){
+  const saved = loadCurrentState();
+  const container = document.getElementById("peopleContainer");
 
-      if (applyCommon && commonCharge > 0) {
-        summaryHtml += `
-          <div class="summary-row"><span>Items subtotal</span> <strong>$${baseItemsTotal.toFixed(2)}</strong></div>
-          <div class="summary-row"><span>Common charge (shared)</span> <strong>$${commonCharge.toFixed(2)}</strong></div>
-          <div class="summary-row"><span>Base total (before discount)</span> <strong>$${baseTotal.toFixed(2)}</strong></div>
-        `;
-      } else {
-        summaryHtml += `
-          <div class="summary-row"><span>Base total</span> <strong>$${baseTotal.toFixed(2)}</strong></div>
-        `;
-      }
+  if (saved && saved.people && saved.people.length) {
+    document.getElementById("billTitle").value = saved.billTitle || "";
 
-      if (Math.abs(totalAfterStaff - baseTotal) > eps) {
-        summaryHtml += `
-          <div class="summary-row"><span>After staff discount</span> <strong>$${totalAfterStaff.toFixed(2)}</strong></div>
-        `;
-      }
+    document.getElementById("staffPct").value = saved.staffPct;
+    document.getElementById("svcPct").value   = saved.svcPct;
+    document.getElementById("gstPct").value   = saved.gstPct;
 
-      if (svcTotal > eps) {
-        summaryHtml += `
-          <div class="summary-row"><span>Service charge</span> <strong>$${svcTotal.toFixed(2)}</strong></div>
-        `;
-      }
+    document.getElementById("applyStaff").checked = !!saved.applyStaff;
+    document.getElementById("applySvc").checked   = !!saved.applySvc;
+    document.getElementById("applyGst").checked   = !!saved.applyGst;
 
-      if (gstTotal > eps) {
-        summaryHtml += `
-          <div class="summary-row"><span>GST</span> <strong>$${gstTotal.toFixed(2)}</strong></div>
-        `;
-      }
+    document.getElementById("commonCharge").value = saved.commonCharge;
+    document.getElementById("applyCommon").checked= saved.applyCommon!==false;
 
-      summaryHtml += `
-        <div class="summary-row grand"><span>Grand total</span> <span class="pill-total">$${grandTotal.toFixed(2)}</span></div>
-      `;
+    container.innerHTML="";
+    saved.people.forEach(p=> addPerson(p.name,p.amt));
 
-      document.getElementById("summaryTotals").innerHTML = summaryHtml;
-      document.getElementById("summaryTitle").textContent = billTitle || "";
+  } else {
+    addPerson("Payee 1");
+    addPerson("Payee 2");
+  }
 
-      // Per-person breakdown
-      const includeCommonColumns = applyCommon && commonCharge > 0 && people.length;
-      const perCommon = includeCommonColumns
-        ? commonCharge / people.length
-        : 0;
+  ["staffPct","svcPct","gstPct"].forEach(id=>{
+    document.getElementById(id).addEventListener("input",()=>updateToggleFromPct(id,"apply"+id.replace("Pct","")));
+  });
 
-      const showStaffCol = applyStaff;
-      const showSvcCol   = applySvc;
-      const showGstCol   = applyGst;
+  updateToggleFromPct("staffPct","applyStaff");
+  updateToggleFromPct("svcPct","applySvc");
+  updateToggleFromPct("gstPct","applyGst");
+})();
+</script>
 
-      let headerCols = `<th>Name</th>`;
-      if (includeCommonColumns) {
-        headerCols += `
-          <th>Base (own items)</th>
-          <th>Common share</th>
-          <th>Base total</th>
-        `;
-      }
-      if (showStaffCol) headerCols += `<th>After Staff (${staffPct}%)</th>`;
-      if (showSvcCol)   headerCols += `<th>After Svc</th>`;
-      if (showGstCol)   headerCols += `<th>After GST</th>`;
-      headerCols += `<th>Total</th>`;
-
-      let tableHTML = `
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                ${headerCols}
-              </tr>
-            </thead>
-            <tbody>
-      `;
-
-      const breakdown = [];
-
-      people.forEach((p) => {
-        const ownBase = p.amt;
-        const commonShare = perCommon;
-        const baseWithCommon = ownBase + commonShare;
-        const share = baseWithCommon / baseTotal;
-
-        let afterStaffStep = baseWithCommon;
-        if (showStaffCol) {
-          afterStaffStep = baseWithCommon * (1 - staffRate);
-        }
-
-        const svcShare = svcTotal * share;
-        let afterSvcStep = afterStaffStep;
-        if (showSvcCol) {
-          afterSvcStep = afterStaffStep + svcShare;
-        }
-
-        const gstShare = gstTotal * share;
-        let afterGstStep = afterSvcStep;
-        if (showGstCol) {
-          afterGstStep = afterSvcStep + gstShare;
-        }
-
-        const finalTotal = afterGstStep;
-
-        breakdown.push({
-          name: p.name,
-          total: finalTotal,
-        });
-
-        let rowCols = `<td>${p.name}</td>`;
-
-        if (includeCommonColumns) {
-          rowCols += `
-            <td>$${ownBase.toFixed(2)}</td>
-            <td>$${commonShare.toFixed(2)}</td>
-            <td>$${baseWithCommon.toFixed(2)}</td>
-          `;
-        }
-
-        if (showStaffCol) rowCols += `<td>$${afterStaffStep.toFixed(2)}</td>`;
-        if (showSvcCol)   rowCols += `<td>$${afterSvcStep.toFixed(2)}</td>`;
-        if (showGstCol)   rowCols += `<td>$${afterGstStep.toFixed(2)}</td>`;
-        rowCols += `<td><strong>$${finalTotal.toFixed(2)}</strong></td>`;
-
-        tableHTML += `<tr>${rowCols}</tr>`;
-      });
-
-      tableHTML += `
-            </tbody>
-          </table>
-        </div>
-      `;
-      document.getElementById("perPersonTable").innerHTML = tableHTML;
-
-      // Store last result for copy
-      lastResult = {
-        billTitle: billTitle || "",
-        breakdown,
-        grandTotal,
-      };
-
-      // Show copy buttons
-      const copyRow = document.getElementById("copyRow");
-      copyRow.style.display = "flex";
-
-      // Save current state for reload
-      const currentState = {
-        billTitle,
-        staffPct, svcPct, gstPct,
-        applyStaff, applySvc, applyGst,
-        commonCharge: commonChargeVal,
-        applyCommon,
-        people,
-      };
-      saveCurrentState(currentState);
-
-      // Scroll to summary (nice on mobile)
-      document.getElementById("summaryTotals")
-        .scrollIntoView({ behavior: "smooth" });
-    }
-
-    /* ---------- Copy helpers ---------- */
-
-    function copyTextToClipboard(text) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text)
-          .then(() => alert("Copied to clipboard"))
-          .catch(() => fallbackCopy(text));
-      } else {
-        fallbackCopy(text);
-      }
-    }
-
-    function fallbackCopy(text) {
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      textarea.style.position = "fixed";
-      textarea.style.top = "-9999px";
-      document.body.appendChild(textarea);
-      textarea.focus();
-      textarea.select();
-      try {
-        document.execCommand("copy");
-        alert("Copied to clipboard");
-      } catch {
-        alert("Unable to copy");
-      }
-      document.body.removeChild(textarea);
-    }
-
-    function copyBreakdown() {
-      if (!lastResult) {
-        alert("Please calculate first.");
-        return;
-      }
-      const { billTitle, breakdown, grandTotal } = lastResult;
-      let text = "🍽 Nom-Nom Splitter";
-      if (billTitle) text += " – " + billTitle;
-      text += "\n\n";
-
-      breakdown.forEach(p => {
-        text += `${p.name}: $${p.total.toFixed(2)}\n`;
-      });
-
-      text += `\nGrand total: $${grandTotal.toFixed(2)}\n`;
-      copyTextToClipboard(text);
-    }
-
-    /* ---------- Initialise on load ---------- */
-
-    (function init() {
-      const saved = loadCurrentState();
-      const container = document.getElementById("peopleContainer");
-
-      if (saved && saved.people && saved.people.length) {
-        document.getElementById("billTitle").value = saved.billTitle || "";
-        document.getElementById("staffPct").value  = saved.staffPct ?? 10;
-        document.getElementById("svcPct").value    = saved.svcPct   ?? 10;
-        document.getElementById("gstPct").value    = saved.gstPct   ?? 9;
-        document.getElementById("applyStaff").checked  = !!saved.applyStaff;
-        document.getElementById("applySvc").checked    = !!saved.applySvc;
-        document.getElementById("applyGst").checked    = !!saved.applyGst;
-        document.getElementById("commonCharge").value  = saved.commonCharge ?? 0;
-        document.getElementById("applyCommon").checked = saved.applyCommon !== false;
-
-        container.innerHTML = "";
-        saved.people.forEach((p) =>
-          addPerson(p.name, p.amt)
-        );
-      } else {
-        addPerson("Payee 1");
-        addPerson("Payee 2");
-      }
-
-      // Attach listeners so 0% auto-disables the toggles live
-      document.getElementById("staffPct")
-        .addEventListener("input", () => updateToggleFromPct("staffPct", "applyStaff"));
-      document.getElementById("svcPct")
-        .addEventListener("input", () => updateToggleFromPct("svcPct", "applySvc"));
-      document.getElementById("gstPct")
-        .addEventListener("input", () => updateToggleFromPct("gstPct", "applyGst"));
-
-      // Run once on load to sync state
-      updateToggleFromPct("staffPct", "applyStaff");
-      updateToggleFromPct("svcPct", "applySvc");
-      updateToggleFromPct("gstPct", "applyGst");
-    })();
-  </script>
 </body>
 </html>
