@@ -808,13 +808,18 @@
         ? commonCharge / people.length
         : 0;
 
-      const baseHeaderOwn = "Base (own items)";
-      const baseHeaderCommon = (applyCommon && commonCharge > 0)
-        ? "Common share"
-        : null;
-      const baseHeaderTotal = (applyCommon && commonCharge > 0)
-        ? "Base total"
-        : "Base";
+      let headerCols = `<th>Name</th>`;
+let includeBaseColumns = applyCommon && commonCharge > 0;
+
+if (includeBaseColumns) {
+  headerCols += `
+    <th>Base (own items)</th>
+    <th>Common share</th>
+    <th>Base total</th>
+  `;
+} else {
+  headerCols += `<th>Base</th>`;
+}
 
       const showStaffCol = applyStaff;
       const showSvcCol   = applySvc;
@@ -1011,3 +1016,4 @@
   </script>
 </body>
 </html>
+
