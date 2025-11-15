@@ -61,6 +61,9 @@
       font-size: 19px;
       margin-top: 18px;
       margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .title-sub {
@@ -80,7 +83,7 @@
       margin-top: -40px;
     }
 
-    input[type="text"], input[type="number"] {
+    input[type="text"], input[type="number"], select {
       width: 100%;
       padding: 9px;
       font-size: 15px;
@@ -90,10 +93,11 @@
       transition: 0.15s;
     }
 
-    input:focus {
+    input:focus, select:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 1px rgba(99,102,241,0.3);
       background: #ffffff;
+      outline: none;
     }
 
     label {
@@ -122,15 +126,23 @@
       grid-template-columns: 1fr 1fr 1fr;
       gap: 16px;
       margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed var(--border);
     }
 
     @media (max-width: 700px) {
       .three-col { grid-template-columns: 1fr; }
     }
 
+    .section-divider {
+      border-top: 1px dashed var(--border);
+      margin-top: 12px;
+      padding-top: 12px;
+    }
+
     .person-row {
       display: grid;
-      grid-template-columns: 1fr 1fr auto;
+      grid-template-columns: 1.3fr 1.1fr auto auto;
       gap: 8px;
       margin-top: 8px;
       align-items: center;
@@ -144,6 +156,16 @@
       border-radius: 6px;
       cursor: pointer;
       font-size: 13px;
+    }
+
+    .payer-radio {
+      margin: 0 4px 0 0;
+    }
+
+    .payer-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
     }
 
     .primary-btn {
@@ -161,19 +183,25 @@
 
     .primary-btn:hover { background: #4f46e5; }
 
-    .secondary-btn {
-      padding: 8px 14px;
+    .secondary-btn, .text-btn {
+      padding: 6px 10px;
       margin-top: 10px;
-      border-radius: 10px;
+      border-radius: 999px;
       border: 1px solid var(--border);
       background: #f9fafb;
       cursor: pointer;
       font-size: 14px;
     }
 
-    .secondary-btn:hover {
+    .secondary-btn:hover, .text-btn:hover {
       border-color: var(--accent);
       background: var(--accent-soft);
+    }
+
+    .text-btn {
+      padding-inline: 10px;
+      background: transparent;
+      border-radius: 999px;
     }
 
     /* Sticky calculate on mobile */
@@ -213,6 +241,12 @@
       margin-top: 8px;
     }
 
+    .summary-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
     .pill-total {
       padding: 4px 12px;
       border-radius: 999px;
@@ -229,6 +263,13 @@
       color: #4f46e5;
     }
 
+    .you-pay {
+      margin-top: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #16a34a;
+    }
+
     /* Table */
     .table-wrapper {
       width: 100%;
@@ -240,7 +281,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 14px;
-      min-width: 420px;
+      min-width: 520px;
     }
 
     th, td {
@@ -255,6 +296,10 @@
     }
 
     td strong { color: var(--accent); }
+
+    tr.you-row td {
+      background: #f5f3ff;
+    }
 
     /* Suggestions dropdown */
     .suggestion-box {
@@ -304,6 +349,55 @@
       color: var(--danger);
     }
 
+    /* Input with unit */
+    .input-with-unit {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-with-unit input {
+      padding-right: 32px;
+    }
+
+    .input-unit {
+      position: absolute;
+      right: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Copy buttons */
+    .copy-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .copy-btn {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f9fafb;
+      padding: 6px 12px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* Payees header */
+    .payees-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
     /* Mobile tweaks */
     @media (max-width: 600px) {
       body {
@@ -350,49 +444,85 @@
       <input id="billTitle" type="text" placeholder="e.g. GoNoodle, HaiDiLao, Team Lunch" />
 
       <!-- Bill settings -->
-      <h2>⚙️ Bill Settings</h2>
+      <div class="section-divider">
+        <h2>⚙️ Bill Settings</h2>
 
-      <div class="three-col">
-        <div>
-          <label>Staff Discount (%)</label>
-          <input id="staffPct" type="number" step="0.01" value="10" />
-          <div class="checkbox-row">
-            <input id="applyStaff" type="checkbox" checked /> Apply
+        <div class="three-col">
+          <div>
+            <label>Staff Discount</label>
+            <div class="input-with-unit">
+              <input id="staffPct" type="number" step="0.01" value="10" />
+              <span class="input-unit">%</span>
+            </div>
+            <div class="checkbox-row">
+              <input id="applyStaff" type="checkbox" checked /> <span>Apply</span>
+            </div>
+            <small class="helper">If set to 0%, discount is not applied.</small>
           </div>
-        </div>
 
-        <div>
-          <label>Service Charge (%)</label>
-          <input id="svcPct" type="number" step="0.01" value="10" />
-          <div class="checkbox-row">
-            <input id="applySvc" type="checkbox" checked /> Apply
+          <div>
+            <label>Service Charge</label>
+            <div class="input-with-unit">
+              <input id="svcPct" type="number" step="0.01" value="10" />
+              <span class="input-unit">%</span>
+            </div>
+            <div class="checkbox-row">
+              <input id="applySvc" type="checkbox" checked /> <span>Apply</span>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <label>GST (%)</label>
-          <input id="gstPct" type="number" step="0.01" value="9" />
-          <div class="checkbox-row">
-            <input id="applyGst" type="checkbox" checked /> Apply
+          <div>
+            <label>GST</label>
+            <div class="input-with-unit">
+              <input id="gstPct" type="number" step="0.01" value="9" />
+              <span class="input-unit">%</span>
+            </div>
+            <div class="checkbox-row">
+              <input id="applyGst" type="checkbox" checked /> <span>Apply</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Common charge -->
-      <h2>🔁 Common Charge</h2>
-      <label>Shared amount (split equally)</label>
-      <input id="commonCharge" type="number" step="0.01" placeholder="e.g. 20 for shared dish" />
-      <div class="checkbox-row">
-        <input id="applyCommon" type="checkbox" checked />
-        <span>Apply common charge</span>
+      <div class="section-divider">
+        <h2>🔁 Common Charge</h2>
+        <label>Shared amount (split equally)</label>
+        <div class="input-with-unit">
+          <input id="commonCharge" type="number" step="0.01" placeholder="e.g. 20 for shared dish" />
+          <span class="input-unit">$</span>
+        </div>
+        <div class="checkbox-row">
+          <input id="applyCommon" type="checkbox" checked />
+          <span>Apply common charge</span>
+        </div>
+        <small class="helper">If applied, this amount will be divided equally across all payees and added to their base.</small>
       </div>
-      <small class="helper">If applied, this amount will be divided equally across all payees and added to their base.</small>
+
+      <!-- Rounding -->
+      <div class="section-divider">
+        <h2>📐 Rounding</h2>
+        <label>Round per-person total to</label>
+        <select id="rounding">
+          <option value="0">No rounding</option>
+          <option value="0.1">Nearest $0.10</option>
+          <option value="0.5">Nearest $0.50</option>
+          <option value="1">Nearest $1.00</option>
+        </select>
+        <small class="helper">Rounded amounts may differ slightly from the grand total.</small>
+      </div>
 
       <!-- Payees -->
-      <h2>👥 Payees</h2>
-      <div id="peopleContainer"></div>
-
-      <button class="secondary-btn" onclick="addPerson()">+ Add Person</button>
+      <div class="section-divider">
+        <div class="payees-header">
+          <h2>👥 Payees</h2>
+          <button type="button" class="text-btn" id="togglePayeesBtn" onclick="togglePayees()">Hide list</button>
+        </div>
+        <div id="payeesSection">
+          <div id="peopleContainer"></div>
+          <button class="secondary-btn" onclick="addPerson()">+ Add Person</button>
+        </div>
+      </div>
 
       <div class="sticky-calc">
         <button class="primary-btn" onclick="calculate()">Calculate</button>
@@ -406,12 +536,20 @@
       <div id="summaryTotals" class="summary-box"></div>
 
       <div id="summaryTitle" class="title-summary-display"></div>
+      <div id="youPay" class="you-pay"></div>
+
+      <div class="copy-row" id="copyRow" style="display:none;">
+        <button class="copy-btn" type="button" onclick="copyBreakdown()">Copy breakdown</button>
+        <button class="copy-btn" type="button" id="copyMineBtn" onclick="copyMyShare()">Copy my amount</button>
+      </div>
 
       <div id="perPersonTable"></div>
     </div>
   </div>
 
   <script>
+    let lastResult = null; // store last calculation for copy/share
+
     /* ---------- Payee history (most used first, deletable) ---------- */
 
     function loadPayeeHistory() {
@@ -547,11 +685,28 @@
       }
     }
 
+    /* ---------- UI Helpers ---------- */
+
+    function togglePayees() {
+      const section = document.getElementById("payeesSection");
+      const btn = document.getElementById("togglePayeesBtn");
+      const isHidden = section.style.display === "none";
+      section.style.display = isHidden ? "block" : "none";
+      btn.textContent = isHidden ? "Hide list" : "Show list";
+    }
+
+    function roundTo(value, step) {
+      if (!step || step <= 0) return value;
+      return Math.round(value / step) * step;
+    }
+
     /* ---------- Core UI logic ---------- */
 
-    function addPerson(name = "", amount = "") {
+    function addPerson(name = "", amount = "", isPayer = false) {
       const row = document.createElement("div");
       row.className = "person-row";
+      const payerId = "payer-" + Math.random().toString(36).slice(2, 8);
+
       row.innerHTML = `
         <div>
           <input type="text"
@@ -562,19 +717,33 @@
                  oninput="showSuggestions(this)"
                  onblur="savePayeeName(this.value)">
         </div>
-        <input type="number" class="amount-input" placeholder="Base amount" step="0.01" value="${amount}">
+        <div class="input-with-unit">
+          <input type="number" class="amount-input" placeholder="Base amount" step="0.01" value="${amount}">
+          <span class="input-unit">$</span>
+        </div>
+        <div class="checkbox-row" style="margin-top:0;">
+          <input type="radio" class="payer-radio" name="payer" id="${payerId}">
+          <label for="${payerId}" class="payer-label">You</label>
+        </div>
         <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>
       `;
       document.getElementById("peopleContainer").appendChild(row);
+
+      if (isPayer) {
+        row.querySelector(".payer-radio").checked = true;
+      }
     }
 
     function calculate() {
+      clearSuggestions(); // close any name dropdowns
+
       const billTitle = document.getElementById("billTitle").value;
 
       const staffPct = +document.getElementById("staffPct").value || 0;
       const svcPct   = +document.getElementById("svcPct").value   || 0;
       const gstPct   = +document.getElementById("gstPct").value   || 0;
       const commonChargeVal = +document.getElementById("commonCharge").value || 0;
+      const roundingStep = parseFloat(document.getElementById("rounding").value) || 0;
 
       let applyStaff  = document.getElementById("applyStaff").checked;
       let applySvc    = document.getElementById("applySvc").checked;
@@ -619,15 +788,20 @@
       const rows = document.querySelectorAll(".person-row");
       const people = [];
       let baseItemsTotal = 0;
+      let payerIndex = -1;
 
       rows.forEach((row, i) => {
         const nameEl = row.querySelector(".name-input");
         const amtEl  = row.querySelector(".amount-input");
+        const payerRadio = row.querySelector(".payer-radio");
+
         const name = (nameEl.value || "").trim() || `Person ${i + 1}`;
         const amt = parseFloat(amtEl.value) || 0;
 
         people.push({ name, amt });
         baseItemsTotal += amt;
+
+        if (payerRadio && payerRadio.checked) payerIndex = i;
 
         savePayeeName(name);
       });
@@ -643,9 +817,11 @@
       const gstTotal = (totalAfterStaff + svcTotal) * gstRate;
       const grandTotal = totalAfterStaff + svcTotal + gstTotal;
 
-      // Summary
+      // Summary (hide $0 rows)
+      const eps = 0.00001;
       let summaryHtml = "";
-      if (commonCharge > 0 && applyCommon) {
+
+      if (applyCommon && commonCharge > 0) {
         summaryHtml += `
           <div class="summary-row"><span>Items subtotal</span> <strong>$${baseItemsTotal.toFixed(2)}</strong></div>
           <div class="summary-row"><span>Common charge (shared)</span> <strong>$${commonCharge.toFixed(2)}</strong></div>
@@ -657,23 +833,39 @@
         `;
       }
 
+      if (Math.abs(totalAfterStaff - baseTotal) > eps) {
+        summaryHtml += `
+          <div class="summary-row"><span>After staff discount</span> <strong>$${totalAfterStaff.toFixed(2)}</strong></div>
+        `;
+      }
+
+      if (svcTotal > eps) {
+        summaryHtml += `
+          <div class="summary-row"><span>Service charge</span> <strong>$${svcTotal.toFixed(2)}</strong></div>
+        `;
+      }
+
+      if (gstTotal > eps) {
+        summaryHtml += `
+          <div class="summary-row"><span>GST</span> <strong>$${gstTotal.toFixed(2)}</strong></div>
+        `;
+      }
+
       summaryHtml += `
-        <div class="summary-row"><span>After staff discount</span> <strong>$${totalAfterStaff.toFixed(2)}</strong></div>
-        <div class="summary-row"><span>Service charge</span> <strong>$${svcTotal.toFixed(2)}</strong></div>
-        <div class="summary-row"><span>GST</span> <strong>$${gstTotal.toFixed(2)}</strong></div>
         <div class="summary-row grand"><span>Grand total</span> <span class="pill-total">$${grandTotal.toFixed(2)}</span></div>
       `;
-
-      document.getElementById("summaryTotals").innerHTML = summaryHtml;
-      document.getElementById("summaryTitle").textContent = billTitle || "";
 
       // Per-person breakdown
       const perCommon = (applyCommon && commonCharge > 0 && people.length)
         ? commonCharge / people.length
         : 0;
 
-      const baseHeader = (applyCommon && commonCharge > 0)
-        ? "Base (incl. common)"
+      const baseHeaderOwn = "Base (own items)";
+      const baseHeaderCommon = (applyCommon && commonCharge > 0)
+        ? "Common share"
+        : null;
+      const baseHeaderTotal = (applyCommon && commonCharge > 0)
+        ? "Base total"
         : "Base";
 
       const showStaffCol = applyStaff;
@@ -682,8 +874,10 @@
 
       let headerCols = `
         <th>Name</th>
-        <th>${baseHeader}</th>
+        <th>${baseHeaderOwn}</th>
       `;
+      if (baseHeaderCommon) headerCols += `<th>${baseHeaderCommon}</th>`;
+      headerCols += `<th>${baseHeaderTotal}</th>`;
       if (showStaffCol) headerCols += `<th>After Staff (${staffPct}%)</th>`;
       if (showSvcCol)   headerCols += `<th>After Svc</th>`;
       if (showGstCol)   headerCols += `<th>After GST</th>`;
@@ -700,8 +894,13 @@
             <tbody>
       `;
 
-      people.forEach(p => {
-        const baseWithCommon = p.amt + perCommon;
+      let roundedTotalSum = 0;
+      const breakdown = [];
+
+      people.forEach((p, index) => {
+        const ownBase = p.amt;
+        const commonShare = perCommon;
+        const baseWithCommon = ownBase + commonShare;
         const share = baseWithCommon / baseTotal;
 
         let afterStaffStep = baseWithCommon;
@@ -721,16 +920,32 @@
           afterGstStep = afterSvcStep + gstShare;
         }
 
+        let finalTotal = afterGstStep;
+        if (roundingStep > 0) {
+          finalTotal = roundTo(afterGstStep, roundingStep);
+        }
+
+        roundedTotalSum += finalTotal;
+
+        breakdown.push({
+          name: p.name,
+          total: finalTotal,
+        });
+
+        const isPayer = index === payerIndex;
+
         let rowCols = `
-          <td>${p.name}</td>
-          <td>$${baseWithCommon.toFixed(2)}</td>
+          <td>${isPayer ? `<strong>${p.name} (You)</strong>` : p.name}</td>
+          <td>$${ownBase.toFixed(2)}</td>
         `;
+        if (baseHeaderCommon) rowCols += `<td>$${commonShare.toFixed(2)}</td>`;
+        rowCols += `<td>$${baseWithCommon.toFixed(2)}</td>`;
         if (showStaffCol) rowCols += `<td>$${afterStaffStep.toFixed(2)}</td>`;
         if (showSvcCol)   rowCols += `<td>$${afterSvcStep.toFixed(2)}</td>`;
         if (showGstCol)   rowCols += `<td>$${afterGstStep.toFixed(2)}</td>`;
-        rowCols += `<td><strong>$${afterGstStep.toFixed(2)}</strong></td>`;
+        rowCols += `<td><strong>$${finalTotal.toFixed(2)}</strong></td>`;
 
-        tableHTML += `<tr>${rowCols}</tr>`;
+        tableHTML += `<tr class="${isPayer ? "you-row" : ""}">${rowCols}</tr>`;
       });
 
       tableHTML += `
@@ -739,6 +954,44 @@
         </div>
       `;
       document.getElementById("perPersonTable").innerHTML = tableHTML;
+
+      // If rounding is enabled, add note comparing sums
+      if (roundingStep > 0) {
+        const diff = Math.abs(roundedTotalSum - grandTotal);
+        if (diff > 0.01) {
+          summaryHtml += `
+            <div class="summary-note">
+              Sum of rounded per-person totals: $${roundedTotalSum.toFixed(2)} (differs slightly from grand total).
+            </div>
+          `;
+        }
+      }
+
+      document.getElementById("summaryTotals").innerHTML = summaryHtml;
+      document.getElementById("summaryTitle").textContent = billTitle || "";
+
+      // You pay
+      const youPayEl = document.getElementById("youPay");
+      if (payerIndex >= 0 && breakdown[payerIndex]) {
+        youPayEl.textContent = `You pay: $${breakdown[payerIndex].total.toFixed(2)}`;
+      } else {
+        youPayEl.textContent = "";
+      }
+
+      // Store last result for copy
+      lastResult = {
+        billTitle: billTitle || "",
+        breakdown,
+        grandTotal,
+        roundingStep,
+        payerIndex,
+      };
+
+      // Show copy buttons
+      const copyRow = document.getElementById("copyRow");
+      copyRow.style.display = "flex";
+      const copyMineBtn = document.getElementById("copyMineBtn");
+      copyMineBtn.style.display = (payerIndex >= 0) ? "inline-block" : "none";
 
       // Save current state for reload
       const currentState = {
@@ -756,7 +1009,72 @@
         .scrollIntoView({ behavior: "smooth" });
     }
 
-    // Initialise on load
+    /* ---------- Copy helpers ---------- */
+
+    function copyTextToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => alert("Copied to clipboard"))
+          .catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.top = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        alert("Copied to clipboard");
+      } catch {
+        alert("Unable to copy");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function copyBreakdown() {
+      if (!lastResult) {
+        alert("Please calculate first.");
+        return;
+      }
+      const { billTitle, breakdown, grandTotal } = lastResult;
+      let text = "🍽 Nom-Nom Splitter";
+      if (billTitle) text += " – " + billTitle;
+      text += "\n\n";
+
+      breakdown.forEach(p => {
+        text += `${p.name}: $${p.total.toFixed(2)}\n`;
+      });
+
+      text += `\nGrand total: $${grandTotal.toFixed(2)}\n`;
+      copyTextToClipboard(text);
+    }
+
+    function copyMyShare() {
+      if (!lastResult) {
+        alert("Please calculate first.");
+        return;
+      }
+      const { breakdown, payerIndex, billTitle } = lastResult;
+      if (payerIndex < 0 || !breakdown[payerIndex]) {
+        alert("Please select who is 'You' in the payees list.");
+        return;
+      }
+      const p = breakdown[payerIndex];
+      let text = `🍽 Nom-Nom Splitter`;
+      if (billTitle) text += " – " + billTitle;
+      text += `\n\nYou pay: $${p.total.toFixed(2)} (${p.name})\n`;
+      copyTextToClipboard(text);
+    }
+
+    /* ---------- Initialise on load ---------- */
+
     (function init() {
       const saved = loadCurrentState();
       const container = document.getElementById("peopleContainer");
@@ -773,9 +1091,11 @@
         document.getElementById("applyCommon").checked = saved.applyCommon !== false;
 
         container.innerHTML = "";
-        saved.people.forEach(p => addPerson(p.name, p.amt));
+        saved.people.forEach((p, idx) =>
+          addPerson(p.name, p.amt, idx === 0) // default first as payer
+        );
       } else {
-        addPerson("Payee 1");
+        addPerson("Payee 1", "", true);
         addPerson("Payee 2");
       }
 
