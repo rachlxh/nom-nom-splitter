@@ -151,6 +151,10 @@
 
     .text-btn { background:transparent; }
 
+    .sticky-calc {
+      margin-top:14px;
+    }
+
     @media (max-width:700px) {
       .sticky-calc {
         position:sticky;
@@ -164,6 +168,7 @@
     .summary-box { border-top:1px dashed var(--border); padding-top:14px; margin-top:10px; }
     .summary-row { display:flex; justify-content:space-between; font-size:15px; margin-bottom:4px; }
     .summary-row.grand { background:var(--accent-soft); padding:6px 10px; border-radius:10px; margin-top:8px; }
+
     .pill-total { padding:4px 12px; background:#4f46e5; color:white; border-radius:999px; font-weight:600; }
 
     .title-summary-display { margin-top:16px; font-size:17px; font-weight:600; color:#4f46e5; }
@@ -175,6 +180,27 @@
 
     td strong { color:var(--accent); }
 
+    /* LEFT-Aligned $ inside input fields */
+    .input-with-unit {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-with-unit input {
+      padding-left: 28px !important;
+      padding-right: 10px !important;
+    }
+
+    .input-unit {
+      position: absolute;
+      left: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Suggestion dropdown */
     .suggestion-box {
       border:1px solid var(--border);
       background:#ffffff;
@@ -194,22 +220,12 @@
       align-items:center;
     }
 
-    .suggest-item:hover { background:#eef2ff; color:var(--accent); }
-
     .suggest-remove {
       border:none;
       background:transparent;
       color:var(--text-muted);
-      font-size:13px;
       cursor:pointer;
     }
-
-    .input-with-unit { position:relative; display:flex; align-items:center; }
-    .input-with-unit input { padding-right:32px; }
-    .input-unit { position:absolute; right:10px; color:var(--text-muted); font-size:14px; }
-
-    .copy-row { display:flex; gap:8px; margin-top:10px; }
-    .copy-btn { border-radius:999px; padding:6px 12px; background:#f9fafb; border:1px solid var(--border); cursor:pointer; }
 
     @media (max-width:600px) {
       body { padding:12px; }
@@ -223,7 +239,7 @@
 <body>
   <div class="layout">
 
-    <!-- LEFT PANEL -->
+    <!-- LEFT -->
     <div class="panel">
       <h1>Nom-Nom Splitter 🍽️</h1>
       <div class="title-sub">Enter payees + charges. Summary appears on the right.</div>
@@ -274,8 +290,8 @@
 
       <div class="section-divider">
         <h2>🔁 Common Charge</h2>
-        <label>Shared amount (split equally)</label>
 
+        <label>Shared amount (split equally)</label>
         <div class="input-with-unit">
           <input id="commonCharge" type="number" step="0.01" placeholder="e.g. 20 for shared dish" />
           <span class="input-unit">$</span>
@@ -285,10 +301,6 @@
           <input id="applyCommon" type="checkbox" checked />
           <span>Apply common charge</span>
         </div>
-
-        <small class="helper">
-          If applied, amount is divided equally across all payees and added to Base.
-        </small>
       </div>
 
       <div class="section-divider">
@@ -308,7 +320,7 @@
       </div>
     </div>
 
-    <!-- RIGHT PANEL -->
+    <!-- RIGHT -->
     <div class="panel">
       <h2>📊 Summary</h2>
 
@@ -498,7 +510,6 @@ function calculate() {
   let applySvc   = document.getElementById("applySvc").checked;
   let applyGst   = document.getElementById("applyGst").checked;
 
-  // Auto-disable 0%
   updateToggleFromPct("staffPct","applyStaff");
   updateToggleFromPct("svcPct","applySvc");
   updateToggleFromPct("gstPct","applyGst");
@@ -580,7 +591,6 @@ function calculate() {
   const showSvcCol   = applySvc;
   const showGstCol   = applyGst;
 
-  // HEADER
   let headerCols = `<th>Name</th><th>Base</th>`;
 
   if (includeCommonColumns) {
@@ -649,10 +659,9 @@ function calculate() {
   tableHTML += `</tbody></table></div>`;
   document.getElementById("perPersonTable").innerHTML = tableHTML;
 
-  /* ---------------- STORE RESULT FOR COPY ---------------- */
+  /* ---------------- STORE RESULT ---------------- */
 
   lastResult = { billTitle:billTitle||"", breakdown, grandTotal };
-
   document.getElementById("copyRow").style.display = "flex";
 
   /* ---------------- SAVE STATE ---------------- */
@@ -699,6 +708,7 @@ function copyBreakdown(){
   breakdown.forEach(p=>{
     text+=`${p.name}: $${p.total.toFixed(2)}\n`;
   });
+
   text+=`\nGrand total: $${grandTotal.toFixed(2)}\n`;
 
   copyTextToClipboard(text);
@@ -726,7 +736,6 @@ function copyBreakdown(){
 
     container.innerHTML="";
     saved.people.forEach(p=> addPerson(p.name,p.amt));
-
   } else {
     addPerson("Payee 1");
     addPerson("Payee 2");
@@ -743,4 +752,4 @@ function copyBreakdown(){
 </script>
 
 </body>
-</html>
+</html>  
