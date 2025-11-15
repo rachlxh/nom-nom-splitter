@@ -879,12 +879,17 @@ if (includeBaseColumns) {
           total: finalTotal,
         });
 
-        let rowCols = `
-          <td>${p.name}</td>
-          <td>$${ownBase.toFixed(2)}</td>
-        `;
-        if (baseHeaderCommon) rowCols += `<td>$${commonShare.toFixed(2)}</td>`;
-        rowCols += `<td>$${baseWithCommon.toFixed(2)}</td>`;
+        let rowCols = `<td>${p.name}</td>`;
+
+if (includeBaseColumns) {
+  rowCols += `
+    <td>$${ownBase.toFixed(2)}</td>
+    <td>$${commonShare.toFixed(2)}</td>
+    <td>$${baseWithCommon.toFixed(2)}</td>
+  `;
+} else {
+  rowCols += `<td>$${ownBase.toFixed(2)}</td>`;
+}
         if (showStaffCol) rowCols += `<td>$${afterStaffStep.toFixed(2)}</td>`;
         if (showSvcCol)   rowCols += `<td>$${afterSvcStep.toFixed(2)}</td>`;
         if (showGstCol)   rowCols += `<td>$${afterGstStep.toFixed(2)}</td>`;
@@ -1016,4 +1021,5 @@ if (includeBaseColumns) {
   </script>
 </body>
 </html>
+
 
