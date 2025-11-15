@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <title>Nom-Nom Splitter</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- iOS zoom fix -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
   <style>
     :root {
@@ -67,8 +68,8 @@
 
     input[type="text"], input[type="number"] {
       width: 100%;
-      padding: 9px;
-      font-size: 15px;
+      padding: 10px;
+      font-size: 16px !important;  /* iOS zoom fix */
       border-radius: 8px;
       border: 1px solid var(--border);
       background: #f9fafb;
@@ -118,21 +119,21 @@
       background:#fee2e2;
       color:var(--danger);
       border:none;
-      padding:4px 10px;
+      padding:6px 12px;
       border-radius:6px;
       cursor:pointer;
-      font-size:13px;
+      font-size:14px;
     }
 
     .primary-btn {
       margin-top:10px;
-      padding:11px;
+      padding:12px;
       width:100%;
       border:none;
       border-radius:10px;
       background:var(--accent);
       color:white;
-      font-size:16px;
+      font-size:17px;
       cursor:pointer;
       transition:0.2s;
     }
@@ -140,13 +141,13 @@
     .primary-btn:hover { background:#4f46e5; }
 
     .secondary-btn, .text-btn {
-      padding:6px 10px;
+      padding:7px 12px;
       margin-top:10px;
       border-radius:999px;
       border:1px solid var(--border);
       background:#f9fafb;
       cursor:pointer;
-      font-size:14px;
+      font-size:15px;
     }
 
     .text-btn { background:transparent; }
@@ -166,25 +167,25 @@
     }
 
     .summary-box { border-top:1px dashed var(--border); padding-top:14px; margin-top:10px; }
-    .summary-row { display:flex; justify-content:space-between; font-size:15px; margin-bottom:4px; }
+    .summary-row { display:flex; justify-content:space-between; font-size:16px; margin-bottom:4px; }
     .summary-row.grand { background:var(--accent-soft); padding:6px 10px; border-radius:10px; margin-top:8px; }
 
     .pill-total { padding:4px 12px; background:#4f46e5; color:white; border-radius:999px; font-weight:600; }
 
-    .title-summary-display { margin-top:16px; font-size:17px; font-weight:600; color:#4f46e5; }
+    .title-summary-display { margin-top:16px; font-size:18px; font-weight:600; color:#4f46e5; }
 
     .table-wrapper { width:100%; overflow-x:auto; margin-top:16px; }
-    table { width:100%; border-collapse:collapse; font-size:14px; min-width:520px; }
+    table { width:100%; border-collapse:collapse; font-size:15px; min-width:520px; }
     th,td { padding:8px; border-bottom:1px solid #f1f5f9; text-align:left; }
     th { background:#f9fafb; font-weight:600; }
 
     td strong { color:var(--accent); }
 
-    /* DEFAULT: % stays right */
+    /* Default: % on right */
     .input-unit {
       position: absolute;
       right: 10px;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-muted);
       pointer-events: none;
     }
@@ -195,7 +196,7 @@
       align-items: center;
     }
 
-    /* $ ONLY: move to left */
+    /* Currency inputs ($) only */
     .currency-input input {
       padding-left: 28px !important;
       padding-right: 10px !important;
@@ -206,6 +207,7 @@
       right: auto !important;
     }
 
+    /* PAYEE HISTORY */
     .suggestion-box {
       border:1px solid var(--border);
       background:#ffffff;
@@ -219,7 +221,7 @@
     .suggestion-item {
       padding:6px 8px;
       cursor:pointer;
-      font-size:14px;
+      font-size:15px;
       display:flex;
       justify-content:space-between;
       align-items:center;
@@ -230,18 +232,19 @@
       background:transparent;
       color:var(--text-muted);
       cursor:pointer;
+      font-size:15px;
     }
 
     @media (max-width:600px) {
       body { padding:12px; }
       .panel { padding:16px; border-radius:14px; }
       h1 { font-size:24px; }
-      th,td { font-size:13px; }
+      th,td { font-size:14px; }
     }
   </style>
 </head>
 
-<body>
+  <body>
   <div class="layout">
 
     <!-- LEFT -->
@@ -330,7 +333,7 @@
       </div>
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT SUMMARY -->
     <div class="panel">
       <h2>📊 Summary</h2>
 
@@ -442,7 +445,8 @@ document.addEventListener("click", (e) => {
     clearSuggestions();
   }
 });
-  /* ---------------- SAVE BILL STATE ---------------- */
+
+/* ---------------- SAVE BILL STATE ---------------- */
 
 function saveCurrentState(state) {
   localStorage.setItem("billStateV1", JSON.stringify(state));
